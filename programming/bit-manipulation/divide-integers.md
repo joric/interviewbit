@@ -28,7 +28,7 @@ Think in terms of bits.
 
 2. How do you determine the most significant bit in the answer?
 
-Iterate on the bit position 'i' from 31 to 1 and find the first bit for which divisor«i is less than dividend.
+Iterate on the bit position 'i' from 31 to 1 and find the first bit for which `divisor << i` is less than dividend.
 
 3. How do you use (1) to move forward in similar fashion?
 
