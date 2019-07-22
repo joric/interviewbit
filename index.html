@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MyInterviewBit</title>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/3.0.1/github-markdown.min.css" id="_theme">
+<link rel="stylesheet" type="text/css" href="https://unpkg.com/prismjs@1.16.0/themes/prism.css">
+<script src="https://unpkg.com/prismjs@1.16.0/prism.js"></script>
+<script src="https://unpkg.com/prismjs@1.16.0/components/prism-c.min.js"></script>
+<script src="https://unpkg.com/prismjs@1.16.0/components/prism-cpp.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<style>
+.markdown-body {
+  min-width: 888px;
+  max-width: 888px;
+  background-color: #fff;
+  border-color: #ddd;
+  overflow: auto;
+  border-width: 1px;
+  border-style: solid;
+  border-image: initial;
+  padding: 45px;
+  margin: 20px auto;
+}
+
+.sidebar {
+  background-color: #f6f8fa;
+  font-family: Segoe UI,Helvetica,Arial,sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+  transition: 0.5s;
+}
+
+#main {
+  transition: margin-left .5s;
+}
+
+.sidebar > ul {
+    padding-bottom: 2.5em;
+}
+
+.sidebar > ul ul {
+    padding-left: 1em;
+}
+
+.menu_btn {
+  cursor: pointer;
+  position: fixed;
+  left: 33px;
+  top: 27px;
+}
+
+.menu_btn > div {
+  background-color: #444;
+  width: 19px;
+  height: 3px;
+  margin: 3px 0;
+}
+
+</style>
+
+<script>
+chapters = 
+{
+  "Arrays": {
+    "Array math": {
+      "Min Steps in Infinite Grid": {"pts": "150", "tags": ["Directi"]},
+      "Add One To Number": {"pts": "225"},
+      "Max Sum Contiguous Subarray": {"pts": "225", "tags": ["Amazon", "Goldman Sachs"]},
+      "Maximum Absolute Difference": {"pts": "250"},
+      "Repeat and Missing Number Array": {"pts": "350", "tags": ["Amazon"]},
+      "Flip": {"pts": "400", "tags": ["VMWare"]}
+    },
+    "Simulation array": {
+      "Max Non Negative SubArray": {"pts": "150"},
+      "Spiral Order Matrix II": {"pts": "225", "tags": ["JP Morgan", "Amazon"]},
+      "Pascal Triangle": {"pts": "225", "tags": ["Amazon"]},
+      "Kth Row of Pascal's Triangle": {"pts": "225"},
+      "Anti Diagonals": {"pts": "225", "tags": ["Adobe"]}
+    },
+    "Bucketing": {
+      "Noble Integer": {"pts": "200"},
+      "Triplets with Sum between given range": {"pts": "200"},
+      "Largest Number": {"pts": "225", "tags": ["Amazon", "Goldman Sachs"]},
+      "Wave Array": {"pts": "225", "tags": ["Adobe", "Amazon"]},
+      "Hotel Bookings Possible": {"pts": "225", "tags": ["Goldman Sachs"]},
+      "Max Distance": {"pts": "250", "tags": ["Amazon"]},
+      "Maximum Unsorted Subarray": {"pts": "250", "tags": ["Amazon"]},
+      "Find Duplicate in Array": {"pts": "450", "tags": ["Amazon", "VMWare", "Riverbed"]},
+      "Maximum Consecutive Gap": {"pts": "450", "tags": ["Hunan Asset"]}
+    },
+    "Array": {
+      "MAXSPPROD": {"pts": "200"}
+    },
+    "Arrangement": {
+      "Largest Number": {"pts": "225", "tags": ["Amazon", "Goldman Sachs"]},
+      "Rotate Matrix": {"pts": "300", "tags": ["Amazon"]},
+      "Next Permutation": {"pts": "300", "tags": ["Amazon"]},
+      "Find Permutation": {"pts": "300"}
+    },
+    "Value ranges": {
+      "Merge Intervals": {"pts": "225"},
+      "Merge Overlapping Intervals": {"pts": "225", "tags": ["Amazon"]}
+    },
+    "Bucketing or sorting": {
+      "Hotel Bookings Possible": {"pts": "225", "tags": ["Goldman Sachs"]},
+      "Wave Array": {"pts": "225", "tags": ["Adobe", "Amazon"]},
+      "Largest Number": {"pts": "225", "tags": ["Amazon", "Goldman Sachs"]},
+      "Max Distance": {"pts": "250", "tags": ["Amazon"]},
+      "Maximum Unsorted Subarray": {"pts": "250", "tags": ["Amazon"]},
+      "Find Duplicate in Array": {"pts": "450", "tags": ["Amazon", "VMWare", "Riverbed"]},
+      "Maximum Consecutive Gap": {"pts": "450", "tags": ["Hunan Asset"]}
+    },
+    "Space recycle": {
+      "Set Matrix Zeros": {"pts": "300", "tags": ["Oracle", "Amazon"]},
+      "First Missing Integer": {"pts": "300", "tags": ["Model N", "InMobi", "Amazon"]}
+    },
+    "Missing / repeated number": {
+      "First Missing Integer": {"pts": "300", "tags": ["Model N", "InMobi", "Amazon"]},
+      "Repeat and Missing Number Array": {"pts": "350", "tags": ["Amazon"]},
+      "Find Duplicate in Array": {"pts": "450", "tags": ["Amazon", "VMWare", "Riverbed"]},
+      "N/3 Repeat Number": {"pts": "600"}
+    }
+  },
+  "Math": {
+    "Adhoc": {
+      "Prime Sum": {"pts": "150", "tags": ["Epic systems"]},
+      "Sum of pairwise Hamming Distance": {"pts": "200"},
+      "FizzBuzz": {"pts": "200"},
+      "Power Of Two Integers": {"pts": "250", "tags": ["Housing", "Amazon"]}
+    },
+    "Base conversion": {
+      "Excel Column Number": {"pts": "175", "tags": ["Amazon"]},
+      "Excel Column Title": {"pts": "175", "tags": ["Amazon"]}
+    },
+    "Digit op": {
+      "Palindrome Integer": {"pts": "200", "tags": ["HCL"]},
+      "Reverse integer": {"pts": "200", "tags": ["HCL", "Bloomberg"]}
+    },
+    "Number theory": {
+      "Greatest Common Divisor": {"pts": "200", "tags": ["NetApp"]},
+      "Trailing Zeros in Factorial": {"pts": "250", "tags": ["Jabong", "Zillow"]},
+      "Sorted Permutation Rank": {"pts": "250", "tags": ["Housing", "Zenefits"]},
+      "Largest Coprime Divisor": {"pts": "250"},
+      "Sorted Permutation Rank with Repeats": {"pts": "500", "tags": ["Housing", "Zenefits"]}
+    },
+    "Array dp": {
+      "Numbers of length N and value less than K": {"pts": "200"}
+    },
+    "Number encoding": {
+      "Rearrange Array": {"pts": "250"}
+    },
+    "Combinatorics": {
+      "City Tour": {"pts": "300"},
+      "Grid Unique Paths": {"pts": "375", "tags": ["Amazon", "Adobe"]}
+    }
+  },
+  "Binary Search": {
+    "Search answer": {
+      "Matrix Median": {"pts": "225"},
+      "Square Root of Integer": {"pts": "275", "tags": ["Amazon"]},
+      "Painter's Partition Problem": {"pts": "350", "tags": ["Codenation"]},
+      "Allocate Books": {"pts": "350"}
+    },
+    "Simple binary search": {
+      "Matrix Search": {"pts": "250"},
+      "Search for a Range": {"pts": "250"},
+      "Sorted Insert Position": {"pts": "250"}
+    },
+    "Search step simulation": {
+      "Implement Power Function": {"pts": "275"}
+    },
+    "Sort modification": {
+      "Rotated Sorted Array Search": {"pts": "325", "tags": ["Amazon"]},
+      "Median of Array": {"pts": "325", "tags": ["Amazon", "VMWare", "Goldman Sachs"]}
+    }
+  },
+  "Strings": {
+    "String simulation": {
+      "Palindrome String": {"pts": "150"},
+      "Longest Common Prefix": {"pts": "225"},
+      "Count And Say": {"pts": "250"}
+    },
+    "Programming": {
+      "Amazing Subarrays": {"pts": "150"},
+      "Stringoholics": {"pts": "300"}
+    },
+    "String tricks": {
+      "Minimum Characters required to make a String Palindromic": {"pts": "200", "tags": ["Amazon"]},
+      "Longest Palindromic Substring": {"pts": "500", "tags": ["Amazon", "Groupon"]}
+    },
+    "String search": {
+      "Minimum Characters required to make a String Palindromic": {"pts": "200", "tags": ["Amazon"]},
+      "Implement StrStr": {"pts": "225", "tags": ["Amazon", "Qualcomm", "Wipro"]}
+    },
+    "String parsing": {
+      "Minimum Characters required to make a String Palindromic": {"pts": "200", "tags": ["Amazon"]},
+      "Compare Version Numbers": {"pts": "225", "tags": ["Intuit", "Amazon"]},
+      "Atoi": {"pts": "250", "tags": ["Adobe", "Nvidia", "Agilent systems", "Bloomberg", "Amazon", "Groupon"]},
+      "Valid Number": {"pts": "250", "tags": ["Adobe"]},
+      "Valid Ip Addresses": {"pts": "250", "tags": ["Amazon"]}
+    },
+    "Words": {
+      "Length of Last Word": {"pts": "225", "tags": ["Amazon"]},
+      "Reverse the String": {"pts": "250", "tags": ["Qualcomm", "Amazon", "Cisco"]}
+    },
+    "String math": {
+      "Roman To Integer": {"pts": "250", "tags": ["Amazon"]},
+      "Integer To Roman": {"pts": "250", "tags": ["Amazon"]},
+      "Add Binary Strings": {"pts": "300"},
+      "Power of 2": {"pts": "350", "tags": ["Amazon"]},
+      "Multiply Strings": {"pts": "375"}
+    },
+    "Pretty print": {
+      "Justified Text": {"pts": "300"},
+      "Zigzag String": {"pts": "300"},
+      "Pretty Json": {"pts": "400"}
+    }
+  },
+  "Bit Manipulation": {
+    "Bucketing": {
+      "Min XOR value": {"pts": "200", "tags": ["Booking.com"]}
+    },
+    "Bit play": {
+      "Number of 1 Bits": {"pts": "200", "tags": ["Adobe"]},
+      "Reverse Bits": {"pts": "225", "tags": ["Nvidia", "HCL", "Amazon"]},
+      "Divide Integers": {"pts": "250", "tags": ["Amazon"]},
+      "Different Bits Sum Pairwise": {"pts": "300"}
+    },
+    "Bit array": {
+      "Single Number": {"pts": "275", "tags": ["Amazon"]},
+      "Single Number II": {"pts": "275", "tags": ["Amazon"]}
+    }
+  },
+  "Two Pointers": {
+    "Multiple arrays": {
+      "Merge Two Sorted Lists II": {"pts": "200", "tags": ["Adobe", "Expedia"]},
+      "Intersection Of Sorted Arrays": {"pts": "225"}
+    },
+    "Two pointer": {
+      "Minimize the absolute difference": {"pts": "200"}
+    },
+    "Sorting": {
+      "3 Sum": {"pts": "225", "tags": ["Amazon"]},
+      "3 Sum Zero": {"pts": "225"},
+      "Counting Triangles": {"pts": "225"},
+      "Diffk": {"pts": "300"}
+    },
+    "Inplace update": {
+      "Remove Duplicates from Sorted Array": {"pts": "250", "tags": ["United Healthgroup", "Amazon", "Expedia"]},
+      "Remove Duplicates from Sorted Array II": {"pts": "250", "tags": ["Expedia"]},
+      "Remove Element from Array": {"pts": "250", "tags": ["Amazon"]},
+      "Sort by Color": {"pts": "325"}
+    },
+    "Tricks": {
+      "Max Continuous Series of 1s": {"pts": "300", "tags": ["VMWare"]},
+      "Array 3 Pointers": {"pts": "400"},
+      "Container With Most Water": {"pts": "400", "tags": ["Amazon"]}
+    }
+  },
+  "Linked Lists": {
+    "List 2 pointer": {
+      "Palindrome List": {"pts": "200", "tags": ["Amazon"]},
+      "Remove Duplicates from Sorted List": {"pts": "300", "tags": ["VMWare"]},
+      "Remove Duplicates from Sorted List II": {"pts": "300", "tags": ["VMWare"]},
+      "Merge Two Sorted Lists": {"pts": "300", "tags": ["Amazon"]},
+      "Remove Nth Node from List End": {"pts": "350", "tags": ["HCL", "Amazon"]},
+      "Rotate List": {"pts": "350", "tags": ["Amazon"]},
+      "Reverse Link List II": {"pts": "450", "tags": ["Amazon"]},
+      "Reorder List": {"pts": "600", "tags": ["Amazon"]}
+    },
+    "Pointer move": {
+      "K reverse linked list": {"pts": "200", "tags": ["Amazon"]},
+      "Swap List Nodes in pairs": {"pts": "350", "tags": ["Amazon"]},
+      "Reverse Link List II": {"pts": "450", "tags": ["Amazon"]},
+      "Reorder List": {"pts": "600", "tags": ["Amazon"]}
+    },
+    "List math": {
+      "Add Two Numbers as Lists": {"pts": "250", "tags": ["Amazon", "Qualcomm"]},
+      "List Cycle": {"pts": "600", "tags": ["Amazon", "NetApp"]}
+    },
+    "List sort": {
+      "Partition List": {"pts": "275"},
+      "Insertion Sort List": {"pts": "300"},
+      "Sort List": {"pts": "350"}
+    },
+    "List trick": {
+      "Reverse Link List II": {"pts": "450", "tags": ["Amazon"]},
+      "Reorder List": {"pts": "600", "tags": ["Amazon"]}
+    },
+    "List cycle": {
+      "List Cycle": {"pts": "600", "tags": ["Amazon", "NetApp"]}
+    }
+  },
+  "Stacks And Queues": {
+    "Stack simple": {
+      "Simplify Directory Path": {"pts": "250"},
+      "Redundant Braces": {"pts": "300", "tags": ["Amazon"]}
+    },
+    "Cleverstack": {
+      "Nearest Smaller Element": {"pts": "350", "tags": ["Amazon"]},
+      "Largest Rectangle in Histogram": {"pts": "450", "tags": ["Amazon"]},
+      "Sliding Window Maximum": {"pts": "450", "tags": ["Chronus", "Walmart labs", "Amazon"]}
+    },
+    "Stack math": {
+      "Evaluate Expression": {"pts": "400"},
+      "Rain Water Trapped": {"pts": "400", "tags": ["Qualcomm", "Amazon"]}
+    },
+    "Multiple stack": {
+      "Min Stack": {"pts": "400", "tags": ["Amazon", "Adobe"]}
+    }
+  },
+  "Backtracking": {
+    "Subsets": {
+      "Subset": {"pts": "250", "tags": ["Amazon"]},
+      "Combinations": {"pts": "300", "tags": ["Amazon", "Adobe"]},
+      "Combination Sum": {"pts": "300", "tags": ["Amazon", "Adobe"]},
+      "Combination Sum II": {"pts": "300", "tags": ["Amazon", "Infosys"]},
+      "Subsets II": {"pts": "300", "tags": ["Amazon"]}
+    },
+    "Bruteforce builder": {
+      "Letter Phone": {"pts": "250", "tags": ["Epic systems"]},
+      "Palindrome Partitioning": {"pts": "300", "tags": ["Amazon"]},
+      "Generate all Parentheses II": {"pts": "350"}
+    },
+    "Pruned builder": {
+      "Palindrome Partitioning": {"pts": "300", "tags": ["Amazon"]},
+      "Generate all Parentheses II": {"pts": "350"},
+      "NQueens": {"pts": "550", "tags": ["Qualcomm", "Amazon"]},
+      "Sudoku": {"pts": "700", "tags": ["Qualcomm"]}
+    },
+    "Permutations": {
+      "Permutations": {"pts": "350", "tags": ["Adobe"]}
+    },
+    "Maths and backtracking": {
+      "Gray Code": {"pts": "350"},
+      "Kth Permutation Sequence": {"pts": "350", "tags": ["Amazon"]}
+    },
+    "Game solving": {
+      "NQueens": {"pts": "550", "tags": ["Qualcomm", "Amazon"]},
+      "Sudoku": {"pts": "700", "tags": ["Qualcomm"]}
+    }
+  },
+  "Hashing": {
+    "Hash search": {
+      "Colorful Number": {"pts": "150", "tags": ["Epic systems"]},
+      "Largest Continuous Sequence Zero Sum": {"pts": "200"},
+      "2 Sum": {"pts": "300", "tags": ["Amazon"]},
+      "4 Sum": {"pts": "325", "tags": ["Amazon"]},
+      "Valid Sudoku": {"pts": "325", "tags": ["Amazon"]},
+      "Diffk II": {"pts": "375"}
+    },
+    "Key formation": {
+      "Anagrams": {"pts": "350", "tags": ["Amazon", "Goldman Sachs"]},
+      "Equal": {"pts": "350"},
+      "Copy List": {"pts": "450", "tags": ["Amazon"]}
+    },
+    "Hashing two pointer": {
+      "Longest Substring Without Repeat": {"pts": "350", "tags": ["Amazon"]},
+      "Window String": {"pts": "350", "tags": ["Directi"]}
+    },
+    "Maths and hashing": {
+      "Fraction": {"pts": "450", "tags": ["Amazon"]},
+      "Points on the Straight Line": {"pts": "450", "tags": ["Amazon", "InMobi"]}
+    },
+    "Incremental hash": {
+      "Substring Concatenation": {"pts": "1000"}
+    }
+  },
+  "Heaps And Maps": {
+    "Heap": {
+      "N max pair combinations": {"pts": "200", "tags": ["Liv.ai"]},
+      "Magician and Chocolates": {"pts": "250"},
+      "Merge K Sorted Lists": {"pts": "600", "tags": ["Flipkart", "Amazon"]}
+    },
+    "Math": {
+      "Ways to form Max Heap": {"pts": "200", "tags": ["Directi"]}
+    },
+    "Heapmap": {
+      "Distinct Numbers in Window": {"pts": "600", "tags": ["Amazon"]},
+      "LRU Cache": {"pts": "1000", "tags": ["Adobe", "Citigroup", "Amazon"]}
+    }
+  },
+  "Tree Data Structure": {
+    "Traversal": {
+      "Vertical Order traversal of Binary Tree": {"pts": "200", "tags": ["Amazon"]},
+      "Inorder Traversal": {"pts": "350", "tags": ["Amazon"]},
+      "Postorder Traversal": {"pts": "350", "tags": ["Amazon"]},
+      "Preorder Traversal": {"pts": "350", "tags": ["Amazon"]}
+    },
+    "Tries": {
+      "Hotel Reviews": {"pts": "200", "tags": ["Booking.com"]}
+    },
+    "Simple tree ops": {
+      "Balanced Binary Tree": {"pts": "275", "tags": ["Amazon"]}
+    },
+    "2 trees": {
+      "Identical Binary Trees": {"pts": "300", "tags": ["Amazon"]},
+      "Symmetric Binary Tree": {"pts": "300", "tags": ["Amazon"]}
+    },
+    "Tree construction": {
+      "Inorder Traversal of Cartesian Tree": {"pts": "300", "tags": ["Amazon"]},
+      "Sorted Array To Balanced BST": {"pts": "300", "tags": ["VMWare", "Amazon"]},
+      "Binary Tree From Inorder And Postorder": {"pts": "375", "tags": ["Amazon"]},
+      "Construct Binary Tree From Inorder And Preorder": {"pts": "375", "tags": ["Amazon"]}
+    },
+    "Bst traversal": {
+      "Kth Smallest Element In Tree": {"pts": "300", "tags": ["Amazon"]},
+      "2-Sum Binary Tree": {"pts": "400", "tags": ["Amazon"]},
+      "BST Iterator": {"pts": "500", "tags": ["Amazon"]},
+      "Recover Binary Search Tree": {"pts": "750", "tags": ["Amazon"]}
+    },
+    "Inplace change": {
+      "Invert the Binary Tree": {"pts": "300"}
+    },
+    "Level order": {
+      "ZigZag Level Order Traversal BT": {"pts": "350", "tags": ["Amazon"]},
+      "Populate Next Right Pointers Tree": {"pts": "900", "tags": ["Amazon"]}
+    },
+    "Root to leaf": {
+      "Path Sum": {"pts": "350", "tags": ["Amazon"]},
+      "Root to Leaf Paths With Sum": {"pts": "350", "tags": ["Amazon"]},
+      "Max Depth of Binary Tree": {"pts": "350", "tags": ["Goldman Sachs", "Bloomberg"]},
+      "Min Depth of Binary Tree": {"pts": "350", "tags": ["Amazon"]},
+      "Sum Root to Leaf Numbers": {"pts": "350"}
+    },
+    "Trie": {
+      "Shortest Unique Prefix": {"pts": "350"}
+    },
+    "Tree search": {
+      "Least Common Ancestor": {"pts": "450", "tags": ["Adobe", "Amazon"]}
+    },
+    "Linkedlist tree": {
+      "Flatten Binary Tree to Linked List": {"pts": "500", "tags": ["Adobe", "Amazon"]}
+    },
+    "Interval tree": {
+      "Order of People Heights": {"pts": "700"}
+    }
+  },
+  "Dynamic Programming": {
+    "Simple array dp": {
+      "Length of Longest Subsequence": {"pts": "200"},
+      "Largest area of rectangle with permutations": {"pts": "200", "tags": ["Directi"]},
+      "Ways to Decode": {"pts": "225", "tags": ["Amazon"]},
+      "Stairs": {"pts": "225", "tags": ["Morgan Stanley", "Amazon", "Intel"]},
+      "Intersecting Chords in a Circle": {"pts": "300"}
+    },
+    "Greedy or dp": {
+      "Tushar's Birthday Bombs": {"pts": "200"},
+      "Jump Game Array": {"pts": "225", "tags": ["Amazon", "Ebay"]},
+      "Min Jumps Array": {"pts": "300", "tags": ["Amazon", "Ebay"]}
+    },
+    "Dp tricky": {
+      "Longest Arithmetic Progression": {"pts": "200"},
+      "N digit numbers with digit sum S": {"pts": "200"},
+      "Ways to color a 3xN Board": {"pts": "200", "tags": ["Codenation"]},
+      "Shortest common superstring": {"pts": "200"},
+      "Kth Manhattan Distance Neighbourhood": {"pts": "200", "tags": ["Liv.ai"]},
+      "Coins in a Line": {"pts": "300"},
+      "Evaluate Expression To True": {"pts": "350", "tags": ["Amazon"]},
+      "Longest valid Parentheses": {"pts": "700"},
+      "Best Time to Buy and Sell Stocks III": {"pts": "700", "tags": ["Amazon"]}
+    },
+    "Matrix dp": {
+      "Kingdom War": {"pts": "200"},
+      "Min Sum Path in Matrix": {"pts": "300", "tags": ["Amazon"]},
+      "Dungeon Princess": {"pts": "300"},
+      "Min Sum Path in Triangle": {"pts": "300"},
+      "Unique Paths in a Grid": {"pts": "300"},
+      "Max Rectangle in Binary Matrix": {"pts": "350"},
+      "Rod Cutting": {"pts": "350"},
+      "Queen Attack": {"pts": "350"}
+    },
+    "Suffix / prefix dp": {
+      "Sub Matrices with sum Zero": {"pts": "200"},
+      "Coin Sum Infinite": {"pts": "225"},
+      "Best Time to Buy and Sell Stocks I": {"pts": "300", "tags": ["Amazon"]},
+      "Max Product Subarray": {"pts": "300", "tags": ["Amazon"]},
+      "Arrange II": {"pts": "350", "tags": ["Amazon"]}
+    },
+    "Adhoc": {
+      "Largest area of rectangle with permutations": {"pts": "200", "tags": ["Directi"]},
+      "Best Time to Buy and Sell Stocks II": {"pts": "225", "tags": ["Amazon"]}
+    },
+    "Knapsack": {
+      "N digit numbers with digit sum S": {"pts": "200"},
+      "Tushar's Birthday Party": {"pts": "200", "tags": ["Snapdeal"]},
+      "Flip Array": {"pts": "200"},
+      "Equal Average Partition": {"pts": "350", "tags": ["Amazon"]}
+    },
+    "Derived dp": {
+      "Max Sum Without Adjacent Elements": {"pts": "225", "tags": ["Epic systems"]}
+    },
+    "2d string dp": {
+      "Edit Distance": {"pts": "300", "tags": ["Amazon"]},
+      "Longest Increasing Subsequence": {"pts": "300", "tags": ["Epic systems", "Amazon"]},
+      "Repeating Sub-Sequence": {"pts": "300"},
+      "Distinct Subsequences": {"pts": "325"},
+      "Interleaving Strings": {"pts": "500"},
+      "Regular Expression Match": {"pts": "500"},
+      "Regular Expression II": {"pts": "500"},
+      "Scramble String": {"pts": "500"}
+    },
+    "Multiply dp": {
+      "Intersecting Chords in a Circle": {"pts": "300"},
+      "Unique Binary Search Trees II": {"pts": "400", "tags": ["Amazon", "Samsung"]},
+      "Count Permutations of BST": {"pts": "400"}
+    },
+    "Preprocess dp": {
+      "Max Rectangle in Binary Matrix": {"pts": "350"}
+    },
+    "Dp optimized backtrack": {
+      "Word Break II": {"pts": "350", "tags": ["IBM"]}
+    },
+    "Tree dp": {
+      "Max Sum Path in Binary Tree": {"pts": "400", "tags": ["Directi", "Amazon"]}
+    },
+    "Breaking words": {
+      "Word Break": {"pts": "400", "tags": ["IBM"]},
+      "Palindrome Partitioning II": {"pts": "400", "tags": ["Amazon"]},
+      "Scramble String": {"pts": "500"}
+    }
+  },
+  "Greedy Algorithm": {
+    "Bucket 5": {
+      "Highest Product": {"pts": "200", "tags": ["Coursera", "Amazon"]}
+    },
+    "Bucket 6": {
+      "Bulbs": {"pts": "200"}
+    },
+    "Bucket 1": {
+      "Distribute Candy": {"pts": "300", "tags": ["Flipkart", "Amazon"]},
+      "Assign Mice to Holes": {"pts": "300", "tags": ["Amazon"]}
+    },
+    "Bucket 4": {
+      "Seats": {"pts": "300", "tags": ["Walmart labs"]}
+    },
+    "Bucket 3": {
+      "Majority Element": {"pts": "400", "tags": ["Amazon"]}
+    },
+    "Bucket 2": {
+      "Gas Station": {"pts": "700", "tags": ["Bloomberg", "DE Shaw", "Amazon"]}
+    }
+  },
+  "Graph Data Structure & Algorithms": {
+    "Bfs": {
+      "Smallest sequence with given Primes": {"pts": "200", "tags": ["Booking.com"]},
+      "Valid Path": {"pts": "200", "tags": ["Morgan Stanley", "Amazon", "Codenation"]},
+      "Level Order": {"pts": "300", "tags": ["Groupon", "Goldman Sachs"]},
+      "Smallest Multiple With 0 and 1": {"pts": "300", "tags": ["Amazon"]}
+    },
+    "Graph connectivity": {
+      "Commutable Islands": {"pts": "200", "tags": ["Amazon"]},
+      "Possibility of finishing all courses given pre-requisites": {"pts": "200", "tags": ["Amazon"]},
+      "Valid Path": {"pts": "200", "tags": ["Morgan Stanley", "Amazon", "Codenation"]},
+      "Black Shapes": {"pts": "300", "tags": ["Amazon"]},
+      "Capture Regions on Board": {"pts": "500"}
+    },
+    "Depth first search": {
+      "Largest Distance between nodes of a Tree": {"pts": "200"}
+    },
+    "Graph traversal": {
+      "Level Order": {"pts": "300", "tags": ["Groupon", "Goldman Sachs"]},
+      "Stepping Numbers": {"pts": "300", "tags": ["Epic systems"]},
+      "Capture Regions on Board": {"pts": "500"},
+      "Word Search Board": {"pts": "500", "tags": ["Epic systems", "Amazon"]}
+    },
+    "Graph adhoc": {
+      "Convert Sorted List to Binary Search Tree": {"pts": "300"}
+    },
+    "Shortest path": {
+      "Sum Of Fibonacci Numbers": {"pts": "300"},
+      "Knight On Chess Board": {"pts": "300", "tags": ["Goldman Sachs", "Amazon"]},
+      "Word Ladder I": {"pts": "600", "tags": ["Ebay"]},
+      "Word Ladder II": {"pts": "800", "tags": ["Ebay"]}
+    },
+    "Graph hashing": {
+      "Clone Graph": {"pts": "500", "tags": ["Amazon"]}
+    }
+  },
+  "Checkpoints" : {
+    "Level 2" : { "AMORTIZED2" : {} },
+    "Level 3" : { "PRETTYPRINT" : {} },
+    "Level 4" : { "Kth Smallest Element in the Array" : {} },
+    "Level 5" : { "NEXTGREATER" : {},"SUBTRACT" : {} },
+    "Level 6" : { "Longest Consecutive Sequence" : {} },
+    "Level 7" : { "INVERSIONS" : {}, "Next Pointer Binary Tree" : {}, "Valid Binary Search Tree" : {} },
+    "Level 8" : { "Unique Binary Search Trees" : {} },
+    "Misc" : {
+        "Middle element of linked list": {}, 
+        "Divisor Sequences":{}, 
+        "Intersection of Linked Lists":{},
+        "Reverse Linked List":{} 
+      }
+  }
+};
+
+let collapsed = true;
+
+function toggleNav() {
+    let sb = document.getElementById("sidebar");
+    let w = sb.style.width == '' ? '25%' : '';
+    document.getElementById("main").style.marginLeft = sb.style.width = w;
+}
+
+function selectItem(hash, focus, timeout) {
+    sb = document.getElementById("sidebar");
+    for (e of sb.querySelectorAll("li > a")) {
+        let current = e.href.endsWith(hash);
+        e.style.fontWeight = current ? 'bold' : '';
+        if (current && focus) {
+            setTimeout( function(sb,e) {
+                sb.scrollTop = e.offsetTop - sb.clientHeight/2;
+                while (e) {
+                    e.style.display = '';
+                    e = e.parentElement.parentElement;
+                }
+            }, timeout, sb, e);
+        }
+    }
+}
+
+function render(hash, focus) {
+    if (!hash) {
+        hash = '#programming/arrays/array-math/min-steps-in-infinite-grid';
+        focus = true;
+    }
+    window.location.hash = hash;
+
+    let a = hash.replace(/^[^#]*#/gi,'').split('/');
+    a.splice(2,1)
+    file = a.join('/') + '.md';
+
+    let xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function(e) {
+        if (this.readyState==4) {
+            document.getElementById('markdown').innerHTML = this.responseText ? marked(this.responseText) : '404';
+            let a = this.responseURL.split('/');
+            let chapter = a[a.length-2].replace(/\b\w/g, l => l.toUpperCase());
+            let h1 = document.getElementsByTagName("h1");
+            top.document.title = h1.length ? h1[0].innerText +' - ' + chapter + ' - MyInterviewBit': '404';
+        }
+    };
+    xhr.open("GET", file, true);
+    xhr.send();
+    selectItem(hash, focus, 0);
+    return false;
+}
+
+function add_list(root, name) {
+    var li = document.createElement("li");
+    li.innerHTML = '<span>'+name+'</span>';
+    root.appendChild(li);
+    var ul = document.createElement("ul");
+    li.appendChild(ul);
+    return ul;
+}
+
+function add_item(ul, name, tag) {
+    var li = document.createElement("li");
+    li.innerHTML = '<a href="#'+tag+'" onclick="render(this.href)">'+name+'</a>';
+    ul.appendChild(li);
+    return li;
+}
+
+function tagify(s) {
+    return s.toLowerCase().replace("'",'').replace('/','').replace(/[^a-z0-9]+/gi,"-");
+}
+
+function init() {
+    var root = document.createElement("ul");
+    var base = root;
+    base = add_list(root, 'Programming');
+    document.getElementById("sidebar").appendChild(root);
+
+    // load sidebar
+    for ([chapter, panels] of Object.entries(chapters)) {
+        var list = add_list(base, chapter);
+        for ([panel, problems] of Object.entries(panels)) {
+            var sublist = add_list(list, panel);
+            for ([problem, prop] of Object.entries(problems)) {
+                let a = add_item(sublist, problem, 'programming/' + tagify(chapter) + '/' + tagify(panel) + '/' + tagify(problem));
+                if (prop.pts) {
+                    a.innerHTML += ' ('+prop.pts+')';
+                }
+                if (prop.tags) {
+                    a.title = prop.tags.join(', ');
+                }
+            }
+        }
+    }
+
+    var li_ul = root.querySelectorAll("li ul");
+    for (var i = 0; i < li_ul.length; i++) {
+        li_ul[i].style.display = collapsed ? 'none' : '';
+        li_ul[i].parentElement.firstChild.innerText += ' ('+ (li_ul[i].querySelectorAll("li").length - li_ul[i].querySelectorAll("ul").length) + ')';
+    }
+
+    var exp_li = document.querySelectorAll("li > span");
+    for (var i = 0; i < exp_li.length; i++) {
+        exp_li[i].style.cursor = "pointer";
+        exp_li[i].onclick = showul;
+    }
+
+    function showul () {
+        nextul = this.nextElementSibling;
+        nextul.style.display = nextul.style.display=='' ? 'none' : '';
+    }
+
+    document.getElementById("main").onclick = function(e) { if (e.target==this) toggleNav(); }
+    toggleNav();
+
+    marked.setOptions({ highlight: function (code, lang) { return lang=='cpp' ? Prism.highlight(code, Prism.languages[lang], lang) : code; }});
+    render(window.location.hash, true);
+
+    function updateItems(collapse, e) {
+        var li_ul = root.querySelectorAll("li ul");
+        for (var i = 1; i < li_ul.length; i++) {
+            if (!e || (li_ul[i]!=e && li_ul[i]!=e.parentElement.parentElement && li_ul[i]!=e.parentElement.parentElement.parentElement.parentElement))
+                li_ul[i].style.display = collapse ? 'none' : '';
+        }
+    }
+
+    function nextItem(step) {
+        sb = document.getElementById("sidebar");
+        for (e of sb.querySelectorAll("li > a")) {
+            if (e.style.fontWeight == 'bold') {
+                let sib = null;
+                let e0 = e;
+                if (step<0) {
+                    sib = e.parentElement.previousSibling;
+                    if (!sib) {
+                        sib = e.parentElement.parentElement.parentElement.previousSibling;
+
+                        if (!sib) {
+                            sib = e.parentElement.parentElement.parentElement.parentElement.parentElement.previousSibling.children[1];
+                            sib = sib.children[sib.children.length-1];
+                        }
+
+                        let chil = sib.children[1].children;
+                        sib = chil[chil.length-1];
+                    }
+                } else {
+                    sib = e.parentElement.nextSibling;
+                    if (!sib) {
+                        sib = e.parentElement.parentElement.parentElement.nextSibling;
+
+                        if (!sib) {
+                            sib = e.parentElement.parentElement.parentElement.parentElement.parentElement.nextSibling.children[1].children[0];
+                        }
+
+                        let chil = sib.children[1].children;
+                        sib = chil[0];
+                    }
+                }
+
+                if (sib) { 
+                    e = sib.children[0];
+                    hash = e.href.replace(/^[^#]*#/gi,'#');
+                }
+
+                updateItems(collapsed, e);
+                render(hash, true, 1);
+                break;
+            }
+        }
+    }
+
+    window.addEventListener("keydown",function (e) {
+        if (e.keyCode === 70 || e.keyCode === 27) { // F or ESC expands/collapses items
+            collapsed = e.ctrlKey ? false : !collapsed;
+            updateItems(collapsed);
+            selectItem(window.location.hash, true, 0);
+        } else if (e.keyCode === 37) { // left arrow
+            nextItem(-1);
+        } else if (e.keyCode === 39) { // right arrow
+            nextItem(1);
+        }
+    });
+}
+</script>
+
+</head>
+<body onload=init()>
+
+<div class="menu_btn" onclick="toggleNav()">
+    <div></div>
+    <div></div>
+    <div></div>
+</div>
+
+<div id="sidebar" class="sidebar"></div>
+<div id="main"><div id="markdown" class="markdown-body"></div></div>
+
+</body>
+</html>
