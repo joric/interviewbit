@@ -673,7 +673,7 @@ function add_item(ul, name, tag) {
 }
 
 function tagify(s) {
-    return s.toLowerCase().replace("'",'').replace('/','').replace(/[^a-z0-9]+/gi,"-");
+    return s.toLowerCase().replace("&",'and').replace("'",'').replace('/','').replace(/[^a-z0-9]+/gi,"-");
 }
 
 function init() {
