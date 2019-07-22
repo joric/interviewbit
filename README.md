@@ -15,11 +15,18 @@ No jQuery or React or Vue, all in Vanilla JavaScript.
 
 ## Usage
 
-You also can run it without a server, using `--allow-file-access-from-files` option.
-
 * <kbd>ESC</kbd> or <kbd>Ctrl</kbd>+<kbd>F</kbd> - toggle expand / collapse
 * <kbd>→</kbd> - next problem
 * <kbd>←</kbd> - previous problem
+
+You also can run the files it without a server:
+
+* Chrome: use `--allow-file-access-from-files` command line option
+* Firefox: `about:config`, `security.fileuri.strict_origin_policy=false`
+* Edge: works with default settings
+
+For editing Markdown files locally I recommend [Markdown Viewer](https://chrome.google.com/webstore/detail/markdown-viewer/ckkdlimhmcjmikdlpkmbgfkaikojcbjk)
+(Chrome plugin).
 
 ## Copyrights
 
