@@ -19,7 +19,7 @@ No jQuery or React or Vue, all in Vanilla JavaScript.
 * <kbd>→</kbd> - next problem
 * <kbd>←</kbd> - previous problem
 
-You also can run the files it without a server:
+You also can run `index.html` without a server:
 
 * Chrome: use `--allow-file-access-from-files` command line option
 * Firefox: `about:config`, `security.fileuri.strict_origin_policy=false`
