@@ -2,13 +2,13 @@
 
 https://www.interviewbit.com/problems/rod-cutting/
 
-There is a rod of length N lying on x-axis with its left end at x = 0 and right end at x = N. Now, there are M weak points on this rod denoted by positive integer values(all less than N) A1, A2, …, AM. You have to cut rod at all these weak points. You can perform these cuts in any order. After a cut, rod gets divided into two smaller sub-rods. Cost of making a cut is the length of the sub-rod in which you are making a cut.
+There is a rod of length N lying on x-axis with its left end at x = 0 and right end at x = N. Now, there are M weak points on this rod denoted by positive integer values(all less than N) A1, A2, ..., AM. You have to cut rod at all these weak points. You can perform these cuts in any order. After a cut, rod gets divided into two smaller sub-rods. Cost of making a cut is the length of the sub-rod in which you are making a cut.
 
 Your aim is to minimise this cost. Return an array denoting the sequence in which you will make cuts. If two different sequences of cuts give same cost, return the lexicographically smallest.
 
 ### Notes
 ```
-Sequence a1, a2 ,…, an is lexicographically smaller than b1, b2 ,…, bm, if and only if at the first i where ai and bi differ, ai < bi, or if no such i found, then n < m.
+Sequence a1, a2 ,..., an is lexicographically smaller than b1, b2 ,..., bm, if and only if at the first i where ai and bi differ, ai < bi, or if no such i found, then n < m.
 N can be upto 109.
 For example,
 
@@ -37,11 +37,11 @@ So, we return [2, 1, 5].
 
 ## Hint 1
 
-Are you convinced yet any type of greedy solution won’t work? If not, try some examples. 
+Are you convinced yet any type of greedy solution won't work? If not, try some examples. 
 
-Let’s say from the set of cuts A1, A2, …, AN, first cut you make at is Ai.
+Let's say from the set of cuts A1, A2, ..., AN, first cut you make at is Ai.
 
-Then, we have to make cuts from set A1, A2, …, Ai-1, whose order doesn’t depend on set of cuts Ai+1, Ai+2, …, AN.
+Then, we have to make cuts from set A1, A2, ..., Ai-1, whose order doesn't depend on set of cuts Ai+1, Ai+2, ..., AN.
 
 Can you think this in terms of dynamic programming?
 
@@ -50,7 +50,7 @@ Can you think this in terms of dynamic programming?
 
 We rewrite our problem as given N cut points(and you cannot make first and last cut), decide order of these cuts to minimise the cost. So, we insert 0 and N at beginning and end of vector B. Now, we have solve our new problem with respect to this new array(say A).
 
-We define dp(i, j) as minimum cost for making cuts Ai, Ai+1, …, Aj. Note that you are not making cuts Ai and Aj, but they decide the cost for us.
+We define dp(i, j) as minimum cost for making cuts Ai, Ai+1, ..., Aj. Note that you are not making cuts Ai and Aj, but they decide the cost for us.
 
 For solving dp(i, j), we iterate k from i+1 to j-1, assuming that the first cut we make in this interval is Ak. The total cost required(if we make first cut at Ak) is Aj - Ai + dp(i, k) + dp(k, j).
 
