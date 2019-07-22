@@ -17,6 +17,10 @@ No jQuery or React or Vue, all in Vanilla JavaScript.
 
 You also can run it without a server, using `--allow-file-access-from-files` option.
 
+* <kbd>ESC</kbd> or <kbd>Ctrl</kbd>+<kbd>F</kbd> - toggle expand / collapse
+* <kbd>←</kbd> - next problem
+* <kbd>→</kbd> - previous problem
+
 ## Copyrights
 
 This is probably the most complete offline collection up to date (~300 documents).
