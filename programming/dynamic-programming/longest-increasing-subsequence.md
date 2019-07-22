@@ -4,15 +4,15 @@ https://www.interviewbit.com/problems/longest-increasing-subsequence/
 
 Find the longest increasing subsequence of a given sequence / array.
 
-In other words, find a subsequence of array in which the subsequence’s elements are in strictly increasing order, and in which the subsequence is as long as possible. 
+In other words, find a subsequence of array in which the subsequence's elements are in strictly increasing order, and in which the subsequence is as long as possible. 
 This subsequence is not necessarily contiguous, or unique.
 In this case, we only care about the length of the longest increasing subsequence.
 
 Example :
 
 ```
-Input : [0, 8, 4, 12, 2, 10, 6, 14, 1, 9, 5, 13, 3, 11, 7, 15]
-Output : 6
+Input: [0, 8, 4, 12, 2, 10, 6, 14, 1, 9, 5, 13, 3, 11, 7, 15]
+Output: 6
 ```
 
 The sequence: 
@@ -24,7 +24,7 @@ The sequence:
 
 Try to compute longest increasing subsequence ending at ith position for all i.
 
-Think how can you use answers ending on 1st,2nd,3rd,….(i-1)th positions for computing answers ending on ith position.
+Think how can you use answers ending on 1st,2nd,3rd,....(i-1)th positions for computing answers ending on ith position.
 
 Hint: Expected Complexity - O(n^2)
 

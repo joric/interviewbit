@@ -29,9 +29,9 @@ Note: You can assume the numbers in strings don't overflow the primitive data ty
 
 ## Hint 1
 
-The brute force approach would be using three loops and checking each triplet for the sum.It will be O(n³).
+The brute force approach would be using three loops and checking each triplet for the sum.It will be O(n^3).
 
-Remember, we don’t have to print the triplet. We just have to say whether it exists or not. 
+Remember, we don't have to print the triplet. We just have to say whether it exists or not. 
 
 Can you think of something better? 
 
@@ -50,7 +50,7 @@ That leaves us with four unique combinations:
 3.A, B, B
 4.B, B, B
 ```
-We can quickly deduce that case 3 and case 4 are not possible. The minimum value for range B is a little bit more than 1. If we have two numbers that are a little bit more than 1, then our total sum will be a little bit more than 2. Say the numbers are 0.4, 1.0001 and 1.0001. Here sum is greater than 2. Hence, these cases won’t give us the required solution. Thus we can eliminate cases 3,4 and 5 (as they contain at least 2 numbers from range B).
+We can quickly deduce that case 3 and case 4 are not possible. The minimum value for range B is a little bit more than 1. If we have two numbers that are a little bit more than 1, then our total sum will be a little bit more than 2. Say the numbers are 0.4, 1.0001 and 1.0001. Here sum is greater than 2. Hence, these cases won't give us the required solution. Thus we can eliminate cases 3,4 and 5 (as they contain at least 2 numbers from range B).
 
 So then we only have to check cases 1 and 2. Unfortunately, checking these cases is a little difficult. How can we determine if there are three numbers less than or equal to 1 that add up to a value greater than 1 and less than 2?
 
@@ -135,7 +135,7 @@ int Solution::solve (vector < string > &A) {
             break;
         
         double x = arr[i];
-        double m = sum>2 ? max(a, max(b,c)) : sum<=1 ? min(a, min(b,c)) : -1;
+        double m = sum>2 ? max(a, max(b,c)): sum<=1 ? min(a, min(b,c)): -1;
         
         if (m==a) a=x;
         else if (m==b) b=x;

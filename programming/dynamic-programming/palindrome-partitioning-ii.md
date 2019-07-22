@@ -15,7 +15,7 @@ Return 1 since the palindrome partitioning ["aa","b"] could be produced using 1 
 
 ## Hint 1
 
-Firstly, we should be able to answer if substring [i,i+1,….j] is palindrome or not in O(1) with pre-computation of O(n^2).
+Firstly, we should be able to answer if substring [i,i+1,....j] is palindrome or not in O(1) with pre-computation of O(n^2).
 
 Now try to come up with some DP state which can find minimum cut using above data.
 
@@ -24,7 +24,7 @@ Now try to come up with some DP state which can find minimum cut using above dat
 Like other DP problems, we first look at the bruteforce approach. 
 We look at the substrings starting with the index 0, and then figure out the minCut for remaining string. We choose the minimum minCut of the possibilities and our answer becomes min + 1.
 
-The code would go something like this : 
+The code would go something like this: 
 
 ```cpp
 int minCut(string s) {

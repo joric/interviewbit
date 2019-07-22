@@ -36,7 +36,7 @@ There are 2 ways to solve this problem.
 
 Approach 1: Maintain a vector of size 'depth' of the tree. Do any kind of tree traversal keeping track of the current depth. Append the current element to vector[currentDepth]. Since we need stuff left to right, make sure left subtree is visited before the right subtree ( Any of traditional pre/post/inorder traversal should suffice ).
 
-Approach 2: This is important. A lot of times, you’d be asked to do a traditional level order traversal. Or to put in formal words, a traversal where the extra memory used should be proportional to the nodes on a level rather than the depth of the tree. To do that, you need to make sure you are accessing all the nodes on a level before accessing the nodes on next. This is a typical breadth first search problem. Queue FTW.
+Approach 2: This is important. A lot of times, you'd be asked to do a traditional level order traversal. Or to put in formal words, a traversal where the extra memory used should be proportional to the nodes on a level rather than the depth of the tree. To do that, you need to make sure you are accessing all the nodes on a level before accessing the nodes on next. This is a typical breadth first search problem. Queue FTW.
 
 ## Solution
 

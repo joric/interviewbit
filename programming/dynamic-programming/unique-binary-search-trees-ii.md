@@ -2,11 +2,11 @@
 
 https://www.interviewbit.com/problems/unique-binary-search-trees-ii/
 
-Given A, how many structurally unique BST’s (binary search trees) that store values 1...A?
+Given A, how many structurally unique BST's (binary search trees) that store values 1...A?
 
 Example :
 
-Given A = 3, there are a total of 5 unique BST’s.
+Given A = 3, there are a total of 5 unique BST's.
 
 ```
    1         3     3      2      1
@@ -18,7 +18,7 @@ Given A = 3, there are a total of 5 unique BST’s.
 
 ## Hint 1
 
-Can you compute the answer for A = n if you know the answer for A = 1, A = 2, … A = n-1 ?
+Can you compute the answer for A = n if you know the answer for A = 1, A = 2, ... A = n-1 ?
 
 What values can you place at root first and how will it affect the answer? Try to think of DP.
 

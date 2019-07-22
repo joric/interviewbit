@@ -36,10 +36,10 @@ We are trying to modify S1 to become S2.
 
 We look at the first character of both the strings. 
 If they match, we can look at the answer from remaining part of S1 and S2. 
-If they don’t, we have 3 options. 
-1) Insert S2’s first character and then solve the problem for remaining part of S2, and S1.
-2) Delete S1’s first character and trying to match S1’s remaining string with S2.
-3) Replace S1’s first character with S2’s first character in which case we solve the problem for remaining part of S1 and S2.
+If they don't, we have 3 options. 
+1) Insert S2's first character and then solve the problem for remaining part of S2, and S1.
+2) Delete S1's first character and trying to match S1's remaining string with S2.
+3) Replace S1's first character with S2's first character in which case we solve the problem for remaining part of S1 and S2.
 
 The code would probably look something like this :
 

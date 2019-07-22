@@ -2,7 +2,7 @@
 
 https://www.interviewbit.com/problems/zigzag-level-order-traversal-bt
 
-Given a binary tree, return the zigzag level order traversal of its nodes’ values. (ie, from left to right, then right to left for the next level and alternate between).
+Given a binary tree, return the zigzag level order traversal of its nodes' values. (ie, from left to right, then right to left for the next level and alternate between).
 
 Example: 
 Given binary tree
@@ -32,7 +32,7 @@ return
  *     int val;
  *     TreeNode *left;
  *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ *     TreeNode(int x): val(x), left(NULL), right(NULL) {}
  * };
  */
 int height(TreeNode* A)

@@ -48,7 +48,7 @@ Explanation:
 ```
 ## Hint 1
 
-Focus on every single points inside the rectangle. You can’t go to some points which lie inside any of the circle. So basically you know all the points where you can stand at. Can you use this info to figure out a path between origin and destination.
+Focus on every single points inside the rectangle. You can't go to some points which lie inside any of the circle. So basically you know all the points where you can stand at. Can you use this info to figure out a path between origin and destination.
 
 
 ## Solution Approach
