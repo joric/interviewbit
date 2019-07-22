@@ -41,25 +41,25 @@ What if we have first two elements of some Arithmetic Progression? Think about b
 
 Bruteforce solution. Let n be the length of input array. Iterate all over pairs 0 <= i < j < n and build Arithmetic Progression that has first two elements A[i], A[j].
 ```
-for i : [0..n - 1]
-	for j : [i + 1..n - 1]
+for i: [0..n - 1]
+	for j: [i + 1..n - 1]
 		cur = 2
 		lst = A[j]
 		dif = A[j] - A[i]
-		for k : [j + 1..n - 1]
+		for k: [j + 1..n - 1]
 			if (A[k] == lst + dif)
 				cur++
 				lst = A[k]
 		ans = max(ans, cur)
 ```
-It’s O(n ^ 3) solution. Think about Dynamic Programming.
+It's O(n ^ 3) solution. Think about Dynamic Programming.
 
 ## Solution Approach
 
-Let dp[i][j] be the length of Longest Arithmetic progression that ends in positions i and j, i.e. last element is A[j] and element before last is A[i]. How can we calculate a value for fixed i and j? We know two last elements. So we know which number should be before position i. It’s number X such that A[i] - X == A[j] - A[i] -> X == 2 * A[i] - A[j]. I.e we can iterate all over 0 <= k < i and if A[k] == X then update dp[i][j] by the value of dp[k][i] + 1(it’s easy to understand we only need to find rightmost such position).
+Let dp[i][j] be the length of Longest Arithmetic progression that ends in positions i and j, i.e. last element is A[j] and element before last is A[i]. How can we calculate a value for fixed i and j? We know two last elements. So we know which number should be before position i. It's number X such that A[i] - X == A[j] - A[i] -> X == 2 * A[i] - A[j]. I.e we can iterate all over 0 <= k < i and if A[k] == X then update dp[i][j] by the value of dp[k][i] + 1(it's easy to understand we only need to find rightmost such position).
 ```
-for i : [0..n - 1]
-	for j : [i + 1..n - 1]
+for i: [0..n - 1]
+	for j: [i + 1..n - 1]
 		dp[i][j] = 2
 		dif = A[j] - A[i]
 		/*
@@ -68,7 +68,7 @@ for i : [0..n - 1]
 		*/
 		need = 2 * A[i] - A[j]
 		pos = -1
-		for k : [0..i - 1]
+		for k: [0..i - 1]
 			if (a[k] == need) 
 				pos = k
 		if (pos <> -1) 
@@ -109,7 +109,7 @@ int Solution::solve(const vector<int> &A) {
     return ans;
 }
 
-//it’s O(n ^ 2 * log(n)) solution.
+//it's O(n ^ 2 * log(n)) solution.
 //Also we can use unordered map(hash map) here,
 // but its running time is undetermined
 //(it's **O(1)** in average, but constant might be too big).
