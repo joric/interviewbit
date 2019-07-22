@@ -645,7 +645,7 @@ function render(hash, focus) {
         if (this.readyState==4) {
             document.getElementById('markdown').innerHTML = this.responseText ? marked(this.responseText) : '404';
             let a = this.responseURL.split('/');
-            let chapter = a[a.length-2].replace(/\b\w/g, l => l.toUpperCase()).replace('-',' ');
+            let chapter = a[a.length-2].replace(/\b\w/g, l => l.toUpperCase()).replace(/-/gi,' ');
             let h1 = document.getElementsByTagName("h1");
             top.document.title = h1.length ? h1[0].innerText +' - ' + chapter + ' - MyInterviewBit': '404';
         }
