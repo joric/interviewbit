@@ -716,6 +716,8 @@ function init() {
     }
 
     document.getElementById("main").onclick = function(e) { if (e.target==this) toggleNav(); }
+    document.getElementById("sidebar").onclick = function(e) { if (e.target==this) toggleNav(); }
+
     toggleNav();
 
     marked.setOptions({ highlight: function (code, lang) { return lang=='cpp' ? Prism.highlight(code, Prism.languages[lang], lang) : code; }});
