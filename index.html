@@ -681,7 +681,7 @@ function init() {
         if (this.parentElement.parentElement==root) {
             collapsed = !collapsed;
             updateItems(collapsed);
-            selectItem(window.location.hash);
+            selectItem(window.location.hash, collapsed);
             return;
         }
 
