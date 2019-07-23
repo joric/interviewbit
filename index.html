@@ -563,14 +563,25 @@ function toggleNav() {
 function selectItem(hash, focus, timeout) {
     for (e of sb.querySelectorAll("li > a")) {
         let current = e.href.endsWith(hash);
-        e.style.fontWeight = current ? 'bold' : '';
+
+        if (current) {
+            e.parentElement.classList.add('active');
+        } else {
+            e.parentElement.classList.remove('active');
+        }
+
         if (current && focus) {
             setTimeout( function(sb,e) {
-                sb.scrollTop = e.offsetTop - sb.clientHeight/2;
-                while (e) {
-                    e.style.display = '';
-                    e = e.parentElement.parentElement;
+
+                let parent = e.parentElement.parentElement;
+
+                while (parent) {
+                    parent.style.display = '';
+                    parent = parent.parentElement.parentElement;
                 }
+
+                sb.parentElement.scrollTop = e.offsetTop - sb.parentElement.clientHeight/2;
+
             }, timeout, sb, e);
         }
     }
@@ -666,7 +677,7 @@ function init() {
 
     function showul () {
         nextul = this.nextElementSibling;
-        nextul.style.display = nextul.style.display=='' ? 'none' : '';
+        nextul.style.display = nextul.style.display=='block' ? 'none' : 'block';
     }
 
     marked.setOptions({ highlight: function (code, lang) { return lang=='cpp' ? Prism.highlight(code, Prism.languages[lang], lang) : code; }});
@@ -680,9 +691,10 @@ function init() {
         }
     }
 
+    // needs to be rewritten to mvc over chapters
     function nextItem(step) {
         for (e of sb.querySelectorAll("li > a")) {
-            if (e.style.fontWeight == 'bold') {
+            if (e.parentElement.classList.contains('active')) {
                 let sib = null;
                 let e0 = e;
                 if (step<0) {
