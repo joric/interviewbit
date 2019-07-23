@@ -602,12 +602,12 @@ body {
 }
 
 .sidebar-nav > ul > li > ul > li > ul > li > ul {
-	margin: 2px 7px;
+/*	margin: 2px 7px;*/
 }
 
 .sidebar-nav > ul > li > ul > li > ul > li > ul > li {
 	list-style-type: decimal;
-	margin: 5px 7px;
+/*	margin: 5px 7px;*/
 }
 
 .sidebar li {
