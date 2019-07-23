@@ -602,11 +602,11 @@ body {
 }
 
 .sidebar-nav > ul > li > ul > li > ul > li > ul {
-	margin: 2px 4px;
+	margin: 2px 7px;
 }
 
 .sidebar-nav > ul > li > ul > li > ul > li > ul > li {
-	list-style-type: none;
+	list-style-type: decimal;
 	margin: 5px 7px;
 }
 
