@@ -248,7 +248,7 @@ main.hidden {
 	bottom: 0;
 	left: 0;
 	transition: transform .25s ease-out;
-	width: 300px;
+	width: 350px;
 	z-index: 3
 }
 
@@ -357,12 +357,12 @@ body.sticky .sidebar-toggle {
 	top: 0;
 	right: 0;
 	bottom: 0;
-	left: 300px;
+	left: 350px;
 	transition: left .25s ease
 }
 
 body.close .sidebar {
-	transform: translateX(-300px)
+	transform: translateX(-350px)
 }
 
 body.close .sidebar-toggle {
@@ -399,7 +399,7 @@ body.close .content {
 		overflow-x: hidden
 	}
 	.sidebar {
-		left: -300px;
+		left: -350px;
 		transition: transform .25s ease-out
 	}
 	.content {
@@ -419,7 +419,7 @@ body.close .content {
 		padding: 30px 30px 10px 10px
 	}
 	body.close .sidebar {
-		transform: translateX(300px)
+		transform: translateX(350px)
 	}
 	body.close .sidebar-toggle {
 		background-color: hsla(0, 0%, 100%, .8);
@@ -428,7 +428,7 @@ body.close .content {
 		padding: 10px
 	}
 	body.close .content {
-		transform: translateX(300px)
+		transform: translateX(350px)
 	}
 	body.close .app-nav,
 	body.close .github-corner {
