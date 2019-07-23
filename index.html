@@ -638,7 +638,7 @@ function init() {
     collapsed = true;
     sb = document.getElementsByClassName("sidebar-nav")[0];
 
-    var root = document.createElement("ul");
+    root = document.createElement("ul");
     var base = root;
     base = add_list(root, 'Programming');
 
@@ -676,6 +676,14 @@ function init() {
     }
 
     function showul () {
+        // click on top item to expand the whole list (mobile devices)
+        if (this.parentElement.parentElement==root) {
+            collapsed = !collapsed;
+            updateItems(collapsed);
+            selectItem(window.location.hash);
+            return;
+        }
+
         nextul = this.nextElementSibling;
         nextul.style.display = nextul.style.display=='block' ? 'none' : 'block';
     }
