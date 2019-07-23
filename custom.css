@@ -351,7 +351,7 @@ body.sticky .sidebar-toggle {
 }
 
 .content {
-	padding-top: 60px;
+	padding-top: 0px;
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -405,7 +405,7 @@ body.close .content {
 		left: 0;
 		max-width: 100vw;
 		position: static;
-		padding-top: 20px;
+		padding-top: 0px;
 		transition: transform .25s ease
 	}
 	.app-nav,
@@ -582,20 +582,32 @@ body {
 	color: #364149
 }
 
+.sidebar li {
+	font-weight: 400;
+}
+
+.sidebar li.active {
+	font-weight: 600;
+}
+
+
 .sidebar-nav > ul > li, .sidebar-nav > ul > li > ul > li {
 	font-size: 15px;
 	font-weight: 400;
 }
 
 .sidebar-nav > ul > li > ul > li > ul > li {
+	list-style-type: square;
+	margin: 3px 7px;
+}
+
+.sidebar-nav > ul > li > ul > li > ul > li > ul > li {
 	list-style-type: disc;
-	/*list-style-position: inside;*/
-	margin: 6px 7px;
+	margin: 3px 7px;
 }
 
 .sidebar li {
 	margin: 6px 0;
-	font-weight: 600;
 	font-size: 14px;
 }
 
@@ -644,6 +656,7 @@ pre:after {
 }
 
 .markdown-section {
+  margin-bottom: 0px;
   max-width: 888px;
   background-color: #fff;
   border-color: #ddd;
@@ -652,8 +665,13 @@ pre:after {
   border-radius: 3px;
   padding: 45px;
   margin: 20px auto;
-  margin-bottom: 60px;
   position: relative;
+}
+
+@media screen and (max-width:768px) {
+.markdown-section {
+  margin: 0px auto;
+}
 }
 
 .markdown-section>* {

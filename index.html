@@ -548,12 +548,12 @@ chapters =
   }
 };
 
+function setClass(e, set, c) {
+    set ? e.classList.add(c) : e.classList.remove(c);
+}
+
 function toggleClass(e, c) {
-    if (e.classList.contains(c)) {
-        e.classList.remove(c);
-    } else {
-        e.classList.add(c);
-    }
+    e.classList.contains(c) ? e.classList.remove(c) : e.classList.add(c);
 }
 
 function toggleNav() {
@@ -561,23 +561,28 @@ function toggleNav() {
 }
 
 function selectItem(hash, focus, timeout) {
-    for (e of sb.querySelectorAll("li > a")) {
-        let current = e.href.endsWith(hash);
 
-        if (current) {
-            e.parentElement.classList.add('active');
-        } else {
-            e.parentElement.classList.remove('active');
+    // remove active class from all
+    var li_ul = root.querySelectorAll("li ul");
+    for (var i = 1; i < li_ul.length; i++) {
+        setClass(li_ul[i].parentElement, false, 'active');
+    }
+
+    // select item
+    for (e of sb.querySelectorAll("li > a")) {
+        let active = e.href.endsWith(hash);
+
+        setClass(e.parentElement, active, 'active');
+
+        for (let p = e.parentElement.parentElement; active && p; p = p.parentElement.parentElement) {
+            setClass(p.parentElement, true, 'active');
         }
 
-        if (current && focus) {
+        if (active && focus) {
             setTimeout( function(sb,e) {
 
-                let parent = e.parentElement.parentElement;
-
-                while (parent) {
-                    parent.style.display = '';
-                    parent = parent.parentElement.parentElement;
+                for (let p = e.parentElement.parentElement; p; p = p.parentElement.parentElement) {
+                    p.style.display = '';
                 }
 
                 sb.parentElement.scrollTop = e.offsetTop - sb.parentElement.clientHeight/2;
@@ -681,7 +686,6 @@ function init() {
         if (this.parentElement.parentElement==root) {
             collapsed = !collapsed;
             updateItems(collapsed);
-            selectItem(window.location.hash, collapsed);
             return;
         }
 
@@ -692,11 +696,14 @@ function init() {
     marked.setOptions({ highlight: function (code, lang) { return lang=='cpp' ? Prism.highlight(code, Prism.languages[lang], lang) : code; }});
     render(window.location.hash, true);
 
-    function updateItems(collapse, e) {
+    function updateItems(collapse, ex) {
         var li_ul = root.querySelectorAll("li ul");
         for (var i = 1; i < li_ul.length; i++) {
-            if (!e || (li_ul[i]!=e && li_ul[i]!=e.parentElement.parentElement && li_ul[i]!=e.parentElement.parentElement.parentElement.parentElement))
-                li_ul[i].style.display = collapse ? 'none' : '';
+            let e = li_ul[i];
+            let update = !ex || (li_ul[i]!=ex && li_ul[i]!=ex.parentElement.parentElement && li_ul[i]!=ex.parentElement.parentElement.parentElement.parentElement);
+            if (update) {
+                e.style.display = collapse ? 'none' : '';
+            }
         }
     }
 
