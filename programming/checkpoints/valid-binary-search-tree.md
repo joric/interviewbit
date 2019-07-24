@@ -33,18 +33,8 @@ Return 0 / 1 ( 0 for false, 1 for true ) for this problem
 
 
 ## Solution
+### Editorial
 ```cpp
-// editorial
-
-/**
- * Definition for binary tree
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
- */
 #define ll long long int
 int isBST(TreeNode *a, ll min, ll max) {
     if (a == NULL)
@@ -58,16 +48,9 @@ int Solution::isValidBST(TreeNode *a) {
         return 0;
     return isBST(a, 1LL * (1LL * INT_MIN - 1), 1LL * (1LL * INT_MAX + 1));
 }
-
-/**
- * Definition for binary tree
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
- */
+```
+### Mine
+```cpp
 bool checkBST(TreeNode *root, int min, int max) {
     if (!root)
         return true;
@@ -80,3 +63,20 @@ int Solution::isValidBST(TreeNode *A) {
     return checkBST(A, INT_MIN, INT_MAX);
 }
 ```
+
+### Another one
+
+```cpp
+int checkBST(TreeNode *root, TreeNode *l=0, TreeNode *r=0) {
+    if (!root) return true;
+    if (l && l->val >= root->val) return false;
+    if (r && r->val <= root->val) return false;
+    return checkBST(root->left, l, root) 
+        && checkBST(root->right, root, r);
+}
+
+int Solution::isValidBST(TreeNode *root) {
+    return checkBST(root);
+}
+```
+

@@ -40,12 +40,13 @@ Approach 2: This is important. A lot of times, you'd be asked to do a traditiona
 
 ## Solution
 
+### Editorial
+
 ```cpp
 void buildVector(TreeNode *root, int depth, vector<vector<int> > &ret) {
     if(root == NULL) return;
     if(ret.size() == depth)
         ret.push_back(vector<int>());
-
     ret[depth].push_back(root->val);
     buildVector(root->left, depth + 1, ret);
     buildVector(root->right, depth + 1, ret);
@@ -56,6 +57,50 @@ vector<vector<int> > Solution::levelOrder(TreeNode *root) {
     buildVector(root, 0, ret);
     return ret;
 }
+```
+### Lightweight
+
+```cpp
+vector<vector<int>> Solution::levelOrder(TreeNode *A) {
+    int levelSize = 1, nextLevel = 0;
+    vector<vector<int>> result;
+    vector<int> curLevel;
+
+    if (A == NULL)
+        return result;
+
+    queue<TreeNode *> q;
+
+    q.push(A);
+
+    while (q.empty() != true) {
+        TreeNode *node = q.front();
+        q.pop();
+
+        if (node->left != NULL) {
+            q.push(node->left);
+            nextLevel++;
+        }
+
+        if (node->right != NULL) {
+            q.push(node->right);
+            nextLevel++;
+        }
+
+        levelSize--;
+        curLevel.push_back(node->val);
+        if (levelSize == 0) {
+            result.push_back(curLevel);
+            levelSize = nextLevel;
+            nextLevel = 0;
+            curLevel.clear();
+        }
+        delete (node);
+    }
+
+    return result;
+}
+
 ```
 
 ## Asked in

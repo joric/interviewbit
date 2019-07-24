@@ -32,11 +32,6 @@ Output 2:
     4   (1, 3, 6, 24)
 ```
 
-## Hint 1
-
-
-## Solution Approach
-
 ## Solution
 
 ### Editorial
