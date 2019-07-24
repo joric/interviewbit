@@ -22,13 +22,13 @@ You are given a sequence of points and **the order in which you need to cover th
 Give the minimum number of steps in which you can achieve it. You start from the first point.
 
 ### Input
-```
+
 Given two integer arrays A and B, where A[i] is x coordinate and B[i] is y coordinate of ith point respectively.
-```
+
 ### Output
-```
+
 Return an Integer, i.e minimum number of steps.
-```
+
 ### Example
 
 ```
