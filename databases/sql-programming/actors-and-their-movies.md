@@ -14,7 +14,7 @@ NOTE:
 
 1. Output column name has to match the given output schema.
 2. Any name is the concatenation(without any delimiter) of first and last name if present
-3. (E.g. if director_first_name is ‘Alfred’ and director_last_name is ‘Hitchcock’ then director_name is ‘AlfredHitchcock’)
+3. (E.g. if director_first_name is 'Alfred' and director_last_name is 'Hitchcock' then director_name is 'AlfredHitchcock')
 
 ### Example Output
 
