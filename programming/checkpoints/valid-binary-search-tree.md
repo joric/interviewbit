@@ -49,7 +49,7 @@ int Solution::isValidBST(TreeNode *a) {
     return isBST(a, 1LL * (1LL * INT_MIN - 1), 1LL * (1LL * INT_MAX + 1));
 }
 ```
-### Mine
+### CTCI
 ```cpp
 bool checkBST(TreeNode *root, int min, int max) {
     if (!root)
@@ -64,7 +64,7 @@ int Solution::isValidBST(TreeNode *A) {
 }
 ```
 
-### Another one
+### Pointers to nodes
 
 ```cpp
 int checkBST(TreeNode *root, TreeNode *l=0, TreeNode *r=0) {
@@ -79,4 +79,40 @@ int Solution::isValidBST(TreeNode *root) {
     return checkBST(root);
 }
 ```
+
+### Inorder 1
+```cpp
+int inorder(TreeNode *root, int &last) {
+    if (!root) return true;
+    if (!inorder(root->left, last)) return false;
+    if (root->val <= last) return false;
+    last = root->val;
+    return inorder(root->right, last);
+}
+
+int Solution::isValidBST(TreeNode *root) {
+    int last = INT_MIN;
+    return inorder(root, last);
+}
+```
+
+### Inorder 2
+```cpp
+pair<bool, int> checkBst(TreeNode *root, int leftBorder) {
+    if (!root) return make_pair(true, leftBorder);
+    auto result = checkBst(root->left, leftBorder);
+    if (!result.first) return result;
+    if (root->val <= result.second) return make_pair(false, root->val);
+    return checkBst(root->right, root->val);
+}
+
+int Solution::isValidBST(TreeNode* root) {
+    return checkBst(root, INT_MIN).first;
+}
+```
+
+
+
+
+
 
