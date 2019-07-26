@@ -22,27 +22,38 @@ Eg: String is "abaa"
 5.	At time 5, string is "aaba", as 1 letters of the string "aaab" is circularly rotated to the back
 ```
 
-After some units of time, a string becomes equal to it"s original self. 
-Once a string becomes equal to itself, it"s letters start to rotate from the first letter again (process resets). So, if a string takes t time to get back to the original, at time t+1 one letter will be rotated and the string will be it"s original self at 2t time. 
-You have to find the minimum time, where maximum number of strings are equal to their original self. 
-As this time can be very large, give the answer modulo 109+7.
+After some units of time, a string becomes equal to its original self.
+
+Once a string becomes equal to itself, its letters start to rotate from the first letter again (process resets).
+
+So, if a string takes `t` time to get back to the original, at time t+1 one letter
+will be rotated and the string will be its original self at `2t` time.
+
+You have to find the minimum time, where maximum number of strings are equal to their original self.
+
+As this time can be very large, give the answer modulo `10^9+7`.
 
 Note: Your solution will run on multiple test cases so do clear global variables after using them.
 
-Input:
-
+### Input
+```
 A: Array of strings.
-Output:
-
+```
+### Output
+```
 Minimum time, where maximum number of strings are equal to their original self.
-Constraints:
-
+```
+### Constraints
+```
 1 <= size(A) <= 10^5
 1 <= size of each string in A <= 10^5
 Each string consists of only characters 'a' and 'b'
 Summation of length of all strings <= 10^7
-Example:
+```
 
+### Example
+
+```
 Input
 
 A: [a,ababa,aba]
@@ -50,7 +61,7 @@ A: [a,ababa,aba]
 Output
 
 4
-```
+
 String 'a' is it's original self at time 1, 2, 3 and 4.
 String 'ababa' is it's original self only at time 4. (ababa => babaa => baaba => babaa => ababa)
 String 'aba' is it's original self at time 2 and 4. (aba => baa => aba)
@@ -69,7 +80,7 @@ String 1010 takes 3 operations, while string 1001 takes 7 operations.
 
 ## Solution Approach
 
-With respect to a single string, the total number of bits rotated after N operations is 1+2+3+….+N which is (N*(N+1))/2. 
+With respect to a single string, the total number of bits rotated after N operations is 1+2+3+....+N which is (N*(N+1))/2. 
 We get back the original string only when the total number of rotated bits is a multiple of the length of the string S(LEN).
 
 This can be done in O(N) time for each string (Summation of length of all strings is <= 1e6), by finding all (N(N+1))/2 where N starts from 1 and goes upto (2LEN-1).

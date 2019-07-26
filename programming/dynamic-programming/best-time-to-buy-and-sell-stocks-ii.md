@@ -8,8 +8,8 @@ Design an algorithm to find the maximum profit. You may complete as many transac
 
 Example :
 ```
-Input : [1 2 3]
-Return : 2
+Input: [1 2 3]
+Return: 2
 ```
 
 ## Hint 1
@@ -32,7 +32,7 @@ Think and try to come up with a proof on the validity of the statement.
 
 DP based solution:
 
-Let Dp[i] = max profit you can gain in region (i,i+1,….,n).
+Let Dp[i] = max profit you can gain in region (i,i+1,....,n).
 
 Then Dp[i] = max(Dp[i+1],-A[i] + max( A[j]+Dp[j] st j > i ) )
 

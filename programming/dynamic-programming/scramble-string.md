@@ -58,14 +58,16 @@ Lets first think of a bruteforce solution.
 Obviously the 2 strings need to have the same number of characters and the same character set, otherwise the answer is definitely no.
 
 In the bruteforce solution, we loop to find out the root of the tree. 
-Lets say the root is the ith character of string s1. Then the first part of s1 [0…i) can either match ( be a scrambled string of ) to s2[0…i) or s2(i+1 .. L]. Depending on which part s1[0…i) matches to, we match the remaining part of s1 to remaining part of s2. Just to clarify when we say s1 matches s2, we mean s1 is a scrambled string of s2.
+Lets say the root is the ith character of string s1. Then the first part of s1 `[0...i)`
+can either match ( be a scrambled string of ) to `s2[0...i)` or `s2(i+1 .. L]`.
+Depending on which part `s1[0...i)` matches to, we match the remaining part of s1
+to remaining part of s2. Just to clarify when we say s1 matches s2, we mean s1 is a scrambled string of s2.
 
 We can write a very easy recursive function for this.
 
-```
+```java
 public boolean isScramble(String s1, String s2) {
     // CHECK BASE CASES HERE
-
     if (s1 not anagram of s2) return false;
     
     for(int i = 1; i < s1.length(); i++) { // i being the root position
@@ -76,17 +78,19 @@ public boolean isScramble(String s1, String s2) {
 }
 ```
 
-Now note that in any call for this function, the strings s1 and s2 would always be substrings of original S1 and S2. And we can specify substrings using startIndex, endIndex.
+Now note that in any call for this function, the strings s1 and s2 would always be substrings
+of original S1 and S2. And we can specify substrings using `startIndex, endIndex`.
 
-Which means the recursive function can only be called with (startIndex1, endIndex1, startIndex2, endIndex2) possible tuples which can only take LLL*L possibilities roughly.
+Which means the recursive function can only be called with
+`(startIndex1, endIndex1, startIndex2, endIndex2)` possible tuples which can only take `L*L` possibilities roughly.
 
 Memoization ?
 
 Additional Hint :
 
-Function calls are only valid if endIndex1 - startIndex1 = endIndex2 - startIndex2. 
-Can you just look at (startIndex1, endIndex1, startIndex2) and infer the endIndex2 based on these values ? 
-Or keep passing around (startIndex1, startIndex2, length) ?
+Function calls are only valid if `endIndex1 - startIndex1 = endIndex2 - startIndex2`.
+Can you just look at `(startIndex1, endIndex1, startIndex2)` and infer the `endIndex2` based on these values ? 
+Or keep passing around `(startIndex1, startIndex2, length)` ?
 
 
 ## Solution

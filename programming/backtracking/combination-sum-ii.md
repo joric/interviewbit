@@ -3,21 +3,34 @@
 https://www.interviewbit.com/problems/combination-sum-ii
 
 
-e integers.
-Elements in a combination (a1, a2, … , ak) must be in non-descending order. (ie, a1 ≤ a2 ≤ … ≤ ak).
-The solution set must not contain duplicate combinations.
-Example :
+Given a collection of candidate numbers (C) and a target number (T),
+find all unique combinations in C where the candidate numbers sums to T.
+
+Each number in C may only be used once in the combination.
+
+1. Elements in a combination (a[1], a[2], ... , a[k]) must be in non-descending order.
+(ie, a[1] <= a[2] <= ... a[k]).
+2. The solution set must not contain duplicate combinations.
+
+### Example
 
 Given candidate set 10,1,2,7,6,1,5 and target 8,
 
-v solution set is:
+A solution set is:
 
+```
 [1, 7]
 [1, 2, 5]
 [2, 6]
 [1, 1, 6]
- Warning: DO NOT USE LItargetRvRY FUNCTION FOR GENERvTING COMtargetINvTIONS.
+```
+
+### Warning
+
+DO NOT USE LIBRARY FUNCTION FOR GENERATING COMBINATIONS.
+
 Example: itertools.combinations in python.
+
 If you do, we will disqualify your submission retroactively and give you penalty points. 
 
 
@@ -27,18 +40,17 @@ Think how can you use recursion with current index and target sum in order to ge
 
 Also, you will have to take special care of those elements which can be overcounted as they are repeated.
 
+Some elements can be repeated in the input set. Make sure you iterate over the number of occurrences
+of those elements to make sure you are not counting the same combinations again.
 
-
-Some elements can be repeated in the input set. Make sure you iterate over the number of occurrences of those elements to make sure you are not counting the same combinations again.
-
-Once you do that, things are fairly straightforward. You make a recursive call with the remaining sum and make sure the indices are moving forward.
+Once you do that, things are fairly straightforward. You make a recursive call with the remaining
+sum and make sure the indices are moving forward.
 
 ## Solution
 
+### Editorial
+
 ```cpp
-
-// editorial
-
 void solve(vector<int> &A, int start, int end, vector<int> &temp, set<vector<int>> &ans, int sum, unordered_map<int, int> &used) {
     if (sum < 0 || start > end) return;
     if (sum == 0) {
@@ -73,9 +85,9 @@ vector<vector<int>> Solution::combinationSum(vector<int> &A, int B) {
 
     return ret;
 }
-
-// mine
-
+```
+### Mine
+```cpp
 void backtracking(int start, vector<int> &row, int sum, vector<vector<int>> &res, vector<int> &v, int target) {
     if (sum == target) {
         res.push_back(row);
