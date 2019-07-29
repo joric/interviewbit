@@ -48,29 +48,6 @@ BONUS: Can you eliminate one of the state i.e. come up with something having onl
 
 ## Solution
 
-### Fastest
-
-```cpp
-int Solution::isInterleave(string s1, string s2, string s3) {
-    int n = s1.size(), m = s2.size(), k = s3.size();
-    if(k != n + m)
-        return false;
-    bool dp[n+1][m+1];
-    for(int i=0; i<n+1; i++)
-        for(int j=0; j<m+1; j++){
-            if(i==0 && j==0)
-                dp[i][j] = true;
-            else if (i == 0)
-                dp[i][j] = (dp[i][j-1] && s2[j-1] == s3[i+j-1]);
-            else if (j == 0)
-                dp[i][j] = (dp[i-1][j] && s1[i-1] == s3[i+j-1]);
-            else
-                dp[i][j] = (dp[i-1][j] && s1[i-1] == s3[i+j-1] ) || (dp[i][j-1] && s2[j-1] == s3[i+j-1]);
-        }
-    return dp[n][m];
-}
-```
-
 ### Editorial
 ```cpp
 class Solution {
@@ -105,6 +82,43 @@ class Solution {
             return isInterleave(0, 0, 0);
         }
 };
+```
+
+### Fastest
+
+```cpp
+int Solution::isInterleave(string s1, string s2, string s3) {
+    int n = s1.size(), m = s2.size(), k = s3.size();
+    if(k != n + m)
+        return false;
+    bool dp[n+1][m+1];
+    for(int i=0; i<n+1; i++)
+        for(int j=0; j<m+1; j++){
+            if(i==0 && j==0)
+                dp[i][j] = true;
+            else if (i == 0)
+                dp[i][j] = (dp[i][j-1] && s2[j-1] == s3[i+j-1]);
+            else if (j == 0)
+                dp[i][j] = (dp[i-1][j] && s1[i-1] == s3[i+j-1]);
+            else
+                dp[i][j] = (dp[i-1][j] && s1[i-1] == s3[i+j-1] ) || (dp[i][j-1] && s2[j-1] == s3[i+j-1]);
+        }
+    return dp[n][m];
+}
+```
+
+### Mine
+```cpp
+int iv(string& s1, string& s2, string& s3, int i1, int i2, int i3) {
+    if (i1 == s1.size() && i2 == s2.size()) return i3 == s3.size();
+    if (i3 >= s3.size()) return false;
+    return ((i1<s1.size() && s1[i1]==s3[i3]) && iv(s1, s2, s3, i1 + 1, i2, i3 + 1))
+        || ((i2<s2.size() && s2[i2]==s3[i3]) && iv(s1, s2, s3, i1, i2 + 1, i3 + 1));
+}
+
+int Solution::isInterleave(string s1, string s2, string s3) {
+    return iv(s1,s2,s3,0,0,0);
+}
 ```
 
 ## Asked in

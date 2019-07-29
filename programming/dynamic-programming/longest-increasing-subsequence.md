@@ -59,7 +59,7 @@ so that the above "+ 1" is accomplished by "pushing" a_{k} into a copy of the ma
 
 ## Solution
 ### Editorial
-```
+```cpp
 int Solution::lis(const vector<int> &V) {
     if (V.size() == 0) return 0;
     int longest[V.size() + 1];
@@ -80,30 +80,69 @@ int Solution::lis(const vector<int> &V) {
     }
     return maxLen;
 }
+```
 
+### Fastest
+```cpp
+int Solution::lis(const vector<int> &a) 
+{
+    int n=a.size();
+    int lis[n];
+    for(int i=0;i<n;i++)
+    lis[i]=1;
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<i;j++)
+        {
+            if(a[j]<a[i] && lis[i]<lis[j]+1)
+            lis[i]=lis[j]+1;
+        }
+    }
+    int mx=*max_element(lis,lis+n);
+    return mx;
+}
+```
+
+### Lightweight
+```cpp
+int Solution::lis(const vector<int> &A) {
+    
+    int n = A.size();
+    int lis[n];
+    for(int i =0;i<n;i++)
+     lis[i]=1;
+    for(int i =1;i<n;i++)
+    {
+        for(int j =0;j<i;j++)
+        {
+            if(A[i]>A[j] && lis[j]+1>lis[i])
+              lis[i]=lis[j]+1;
+        }
+    }
+    int max = lis[0];
+    for(int i =1;i<n;i++)
+    {
+        if(lis[i]>max)
+          max = lis[i];
+    }
+    return max;
+}
 ```
 
 ### Mine
 ```cpp
-int Solution::lis(const vector<int> &A) {
-    if(A.size() == 0){
-        return 0;
+int Solution::lis(const vector<int>& nums) {
+    vector<int> dp(nums.size());
+    int len = 0;
+    for (int num:nums) {
+        int i = lower_bound(dp.begin(), dp.begin() + len, num) - dp.begin();
+        dp[i] = num;
+        len = max(len, i + 1);
     }
-    vector<int> val(A.size(), 1);
-    int sol = 1;
-    for(int i = 1; i < A.size(); i++){
-        for(int j = 0; j < i; j++){
-            if(A[i] > A[j]){
-                val[i] = max(val[j]+1, val[i]);
-                if(val[i] > sol){
-                    sol = val[i];
-                }
-            }
-        }
-    }
-    return sol;
+    return len;
 }
 ```
+
 ## Asked in
 
 * Facebook
