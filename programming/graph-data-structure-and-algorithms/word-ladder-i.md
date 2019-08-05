@@ -2,24 +2,23 @@
 
 https://www.interviewbit.com/problems/word-ladder-i/
 
-Given two words (start and end), and a dictionary, find the length of shortest transformation sequence from start to end, such that:
+Given two words (start and end), and a dictionary, find the length of shortest transformation
+sequence from start to end, such that:
 
-You must change exactly one character in every transformation
-Each intermediate word must exist in the dictionary
-Example :
+1. You must change exactly one character in every transformation
+2. Each intermediate word must exist in the dictionary
 
-Given:
+### Example
+
 ```
+Given:
 start = "hit"
 end = "cog"
 dict = ["hot","dot","dog","lot","log"]
+As one shortest transformation is "hit" -> "hot" -> "dot" -> "dog" -> "cog", return its length 5.
 ```
 
-As one shortest transformation is `"hit" -> "hot" -> "dot" -> "dog" -> "cog"`, return its length 5.
-
 Note that we account for the length of the transformation path instead of the number of transformation itself.
-
-Note:
 
 1. Return 0 if there is no such transformation sequence.
 2. All words have the same length.
@@ -43,9 +42,9 @@ Which graph traversal algorithm can now help you in computing the shortest path 
 
 ### Editorial
 ```cpp
-int Solution:: ladderLength(string start, string end, vector<string> &dictV) {
+int Solution::ladderLength(string start, string end, vector<string> &dictV) {
     unordered_set<string> dict(dictV.begin(), dictV.end());
-    unordered_map<string, int> distance; // store the distancetance from start to the current word
+    unordered_map<string, int> distance; // store the distance from start to the current word
     queue<string> q; // FIFO for bfs purpose
     distance[start] = 1;
     q.push(start);
@@ -68,5 +67,109 @@ int Solution:: ladderLength(string start, string end, vector<string> &dictV) {
     return distance[end];
 }
 ```
+### Fastest
+```cpp
+bool dist(string a, string b){
+    int count=0;
+    for(int i=0;i<a.length();i++){
+        if(a[i]!=b[i]) count++; 
+    }
+    
+    if(count!=1) 
+    return false;
+    else 
+    return true;
+}
 
+int Solution::ladderLength(string start, string end, vector<string> &dictV) {
+    
+    if(start==end) return 1;
+    
+    if(dist(start,end)) return 2;
+    
+    int n=dictV.size();
+    vector<bool> visit(n,false);
+    queue<pair<int,string> > q;
+    
+    q.push(make_pair(1,start));
+    while(!q.empty()){
+        
+        pair<int,string> pos=q.front();
+        q.pop();
+        int level=pos.first;
+        if(dist(pos.second,end)) return pos.first+1;
+        level++;
+        for(int i=0;i<n;i++){
+            if(!visit[i] && dist(dictV[i],pos.second)){
+                //cout<<level<<" ";
+                visit[i]=true;
+                q.push(make_pair(level,dictV[i]));
+            }
+        }
+    }
+    return 0;
+}
+```
+### Lightweight
+```cpp
+vector<string> fun(string &s,vector<string>& wordDict)
+{
+    int i,j,k;
+    char t;
+    vector<string> result;
+    for(i=0;i<s.length();i++)
+    {
+        char c=s[i];
+        for(j=0;j<26;j++)
+        {
+           t='a'+j;
+           if(s[i]!=t)
+            {
+                s[i]=t;
+                for(k=0;k<wordDict.size();k++)
+                {
+                    if(wordDict[k]==s)
+                    {
+                        result.push_back(s);
+                        wordDict[k]="*";
+                        break;
+                    }
+                }
+                
+                s[i]=c;
+            }
+        }
+    }
+    
+    return result;
+}
+int Solution::ladderLength(string beginWord, string endWord, vector<string> &wordDict) {
+    
+        queue<pair<string,int>  > q;
+        string temp;
+        wordDict.push_back(endWord);
+        int len,i;
+        q.push(make_pair(beginWord,1));
+        
+        while(!q.empty())
+        {
+            
+            temp=q.front().first;
+            len=q.front().second;
+            if(temp==endWord)
+                return len;
+            q.pop();
+            vector<string> n=fun(temp,wordDict);
+            for(i=0;i<n.size();i++)
+                q.push(make_pair(n[i],len+1));
+        
+        }
+        
+        return 0;
+}
+```
+## Asked in
+* Google
+* Microsoft
+* Ebay
 
