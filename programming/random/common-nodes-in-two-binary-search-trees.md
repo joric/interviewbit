@@ -1,6 +1,6 @@
 # Common Nodes in Two Binary Search Trees
 
-https://www.interviewbit.com/problems/common-nodes-in-two-binary-search-trees/?ref=random-problem/
+https://www.interviewbit.com/problems/common-nodes-in-two-binary-search-trees/
 
 Given two BSTs, return the sum of all common nodes in both.
 In case there is no common node, return 0
@@ -12,8 +12,8 @@ In case there is no common node, return 0
 
 ### INPUT FORMAT
 ```
-A : Root of Tree A
-B : Root of Tree B
+A: Root of Tree A
+B: Root of Tree B
 ```
 
 ### EXAMPLE INPUT
@@ -43,11 +43,13 @@ Tree B:
 ```
 ### EXAMPLE EXPLANATION
 ```
-Common Nodes are : 2, 7, 8, 15
+Common Nodes are: 2, 7, 8, 15
 So answer is 2 + 7 + 8 + 15 = 32
 ```
 
 ## Solution Approach
+
+Taken from https://www.geeksforgeeks.org/print-common-nodes-in-two-binary-search-trees/
 
 ### Simple Solution
 
@@ -168,6 +170,43 @@ int Solution::solve(TreeNode* A, TreeNode* B) {
     for (auto &p:m)
         if (p.second>1)
             res += p.first;
+    return res;
+}
+```
+
+### Two stacks
+```cpp
+int Solution::solve(TreeNode *root1, TreeNode *root2) {
+    int res = 0;
+    stack<TreeNode *> s1, s2;
+    while (true) {
+        if (root1) {
+            s1.push(root1);
+            root1 = root1->left;
+        } else if (root2) {
+            s2.push(root2);
+            root2 = root2->left;
+        } else if (!s1.empty() && !s2.empty()) {
+            root1 = s1.top();
+            root2 = s2.top();
+            if (root1->val == root2->val) {
+                res += root1->val;
+                s1.pop();
+                s2.pop();
+                root1 = root1->right;
+                root2 = root2->right;
+            } else if (root1->val < root2->val) {
+                s1.pop();
+                root1 = root1->right;
+                root2 = 0;
+            } else if (root1->val > root2->val) {
+                s2.pop();
+                root2 = root2->right;
+                root1 = 0;
+            }
+        } else
+            break;
+    }
     return res;
 }
 ```
