@@ -198,10 +198,7 @@ vector<int> Solution::solve(vector<int> &A, vector<int> &B) {
             x++;
             continue;
         }
-        while (i < m && x > B[idx[i]]) {
-            res[idx[i]] = x;
-            i++;
-        }
+        while (i < m && x > B[idx[i]]) res[idx[i++]] = x;
         if (i < m) x = B[idx[i]] + 1;
     }
     return res;
