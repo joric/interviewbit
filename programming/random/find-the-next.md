@@ -210,12 +210,10 @@ vector<int> Solution::solve(vector<int> &A, vector<int> &B) {
 vector<int> Solution::solve(vector<int> &A, vector<int> &B) {
     vector<int> res;
     unordered_set<int> s(A.begin(), A.end());
-    for (int x:B)
-        while (x++)
-            if (!s.count(x)) {
-                res.push_back(x);
-                break;
-            }
+    for (int x:B) {
+        while (s.count(++x));
+        res.push_back(x);
+    }
     return res;
 }
 ```
