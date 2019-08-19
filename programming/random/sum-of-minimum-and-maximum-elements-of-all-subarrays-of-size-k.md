@@ -54,36 +54,24 @@ Explanation :
 // no official solution provided
 ```
 
-### Mine (fails tests)
+### Mine (fails advanced tests)
 ```cpp
-int Solution::solve(vector<int> &nums, int k) {
-    deque<int> dq1;
-    deque<int> dq2;
-
-    long long res = 0;
-
-    for (int i = 0; i < nums.size(); i++) {
-
-        while (!dq1.empty() && nums[i] >= nums[dq1.front()]) dq1.pop_front();
-        while (!dq2.empty() && nums[i] <= nums[dq2.front()]) dq2.pop_front();
-
-        dq1.push_front(i);
-        dq2.push_front(i);
-
-        if (dq1.back() <= i - k) dq1.pop_back();
-        if (dq2.back() <= i - k) dq2.pop_back();
-
-        if (i >= k - 1) {
-            res = (res + nums[dq1.back()]) % 1000000007;
-            res = (res + nums[dq2.back()]) % 1000000007;
-        }
+int Solution::solve(vector<int> &a, int k) {
+    long long res = 0;    
+    deque<int> s, g;
+    for (int i = 0; i < a.size(); i++) {
+        while (!s.empty() && a[i] >= a[s.front()]) s.pop_front();
+        while (!g.empty() && a[i] <= a[g.front()]) g.pop_front();
+        s.push_front(i);
+        g.push_front(i);
+        if (s.back() <= i - k) s.pop_back();
+        if (g.back() <= i - k) g.pop_back();
+        if (i >= k - 1) res = (res + a[s.back()] + a[g.back()]) % 1000000007;
     }
-
     return res;
 }
-
 ```
-### Another Mine (fails tests)
+### Another one (fails advanced tests)
 ```cpp
 int Solution::solve(vector<int> &arr, int k) {
     long long sum = 0;
