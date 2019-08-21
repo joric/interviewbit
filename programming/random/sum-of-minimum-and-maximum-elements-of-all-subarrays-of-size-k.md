@@ -54,10 +54,11 @@ Explanation :
 // no official solution provided
 ```
 
-### Mine (fails advanced tests)
+### Mine
 ```cpp
+#define N 1000000007
 int Solution::solve(vector<int> &a, int k) {
-    long long res = 0;    
+    long long x = 0;    
     deque<int> s, g;
     for (int i = 0; i < a.size(); i++) {
         while (!s.empty() && a[i] >= a[s.front()]) s.pop_front();
@@ -66,12 +67,12 @@ int Solution::solve(vector<int> &a, int k) {
         g.push_front(i);
         if (s.back() <= i - k) s.pop_back();
         if (g.back() <= i - k) g.pop_back();
-        if (i >= k - 1) res = (res + a[s.back()] + a[g.back()]) % 1000000007;
+        if (i >= k - 1) x += a[s.back()] + a[g.back()];
     }
-    return res;
+    return (x % N + N) % N;
 }
 ```
-### Another one (fails advanced tests)
+### G4G
 ```cpp
 int Solution::solve(vector<int> &arr, int k) {
     long long sum = 0;
@@ -89,7 +90,7 @@ int Solution::solve(vector<int> &arr, int k) {
     }
 
     for (; i < n; i++) {
-        sum = (sum + (long long)arr[S.front()] + (long long)arr[G.front()]) % 1000000007;
+        sum += arr[S.front()] + arr[G.front()];
         while (!S.empty() && S.front() <= i - k)
             S.pop_front();
         while (!G.empty() && G.front() <= i - k)
@@ -101,12 +102,12 @@ int Solution::solve(vector<int> &arr, int k) {
         G.push_back(i);
         S.push_back(i);
     }
-    sum = (sum + (long long)arr[S.front()] + (long long)arr[G.front()]) % 1000000007;
-    return sum;
+    sum += arr[S.front()] + arr[G.front()];
+    return (sum % 1000000007 + 1000000007) % 1000000007;
 }
 
 ```
-### Python (passes tests)
+### Python
 ```python
 from collections import deque 
 
@@ -142,4 +143,3 @@ class Solution:
         Sum += arr[S[0]] + arr[G[0]]
         return Sum % 1000000007
 ```
-
