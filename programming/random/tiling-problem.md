@@ -123,11 +123,11 @@ int Solution::solve(int A) {
 ```cpp
 int Solution::solve(int n) {
     if (n<=2) return n;
-    long long a = 1, b = 2, c, mod=1e9+7;
-    for (int i=3; i<=n; i++) {
-        c = (a+b) % mod;
-        a = b % mod;
-        b = c % mod;
+    long long a = 1, b = 2, c, mod = 1e9+7;
+    for (int i=3; i<=n; i++){
+        c = (a + b) % mod;
+        a = b;
+        b = c;
     }
     return c;
 }
