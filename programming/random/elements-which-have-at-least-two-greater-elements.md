@@ -43,8 +43,3 @@ vector<int> Solution::solve(vector<int> &A) {
     return A;
 }
 ```
-
-### Another Mine
-```cpp
-
-```
