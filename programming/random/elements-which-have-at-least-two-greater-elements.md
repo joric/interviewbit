@@ -43,3 +43,15 @@ vector<int> Solution::solve(vector<int> &A) {
     return A;
 }
 ```
+
+### Another Mine
+```cpp
+vector<int> Solution::solve(vector<int> &A) {
+    int a = INT_MIN, b = INT_MIN;
+    for (int x:A) if (x>a) { b=a; a=x; } else if (x>b) b = x;
+    for (int i=0, k=0; i<A.size(); i++) if (A[i]<b) A[k++] = A[i];
+    A.resize(A.size()-2);
+    return A;
+}
+```
+
