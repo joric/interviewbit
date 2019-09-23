@@ -245,7 +245,7 @@ vector<int> Solution::solve(TreeNode* root) {
     while(!s.empty()) {
         TreeNode * node = s.top();
         s.pop();
-        res.push_back(node->val);        
+        res.push_back(node->val);
     }
     curr = root->right;
     while(curr) {
@@ -257,23 +257,18 @@ vector<int> Solution::solve(TreeNode* root) {
 ```
 ### Another One
 ```cpp
-void left_view(TreeNode * root, vector<int> &res) {
-    if (!root) return;
-    left_view(root->left, res);
-    res.push_back(root->val);
-}
-
-void right_view(TreeNode * root, vector<int> &res) {
-    if (!root) return;
-    res.push_back(root->val);
-    right_view(root->right, res);
-}
-
 vector<int> Solution::solve(TreeNode* root) {
     vector<int> res;
-    left_view(root->left, res);
-    res.push_back(root->val);
-    right_view(root->right, res);
+    queue<pair<int,TreeNode*>> q;
+    q.push(make_pair(0,root));
+    map<int,TreeNode*> ans;
+    for (auto i=q.front(); !q.empty(); q.pop(), i=q.front()){
+        if(!i.second) continue;
+        ans.insert(i);
+        q.push(make_pair(i.first+1, i.second->right));
+        q.push(make_pair(i.first-1, i.second->left));
+    }
+    for (auto i:ans) res.push_back(i.second->val);
     return res;
 }
 ```
