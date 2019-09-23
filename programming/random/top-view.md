@@ -261,14 +261,16 @@ vector<int> Solution::solve(TreeNode* root) {
     vector<int> res;
     queue<pair<int,TreeNode*>> q;
     q.push(make_pair(0,root));
-    map<int,TreeNode*> ans;
-    for (auto i=q.front(); !q.empty(); q.pop(), i=q.front()){
-        if(!i.second) continue;
-        ans.insert(i);
-        q.push(make_pair(i.first+1, i.second->right));
-        q.push(make_pair(i.first-1, i.second->left));
+    map<int, TreeNode*> m;
+    while (!q.empty()) {
+        auto p = q.front();
+        q.pop();
+        if (p.second==0) continue;
+        m.insert(p);
+        q.push(make_pair(p.first+1, p.second->right));
+        q.push(make_pair(p.first-1, p.second->left));
     }
-    for (auto i:ans) res.push_back(i.second->val);
+    for (auto p:m) res.push_back(p.second->val);
     return res;
 }
 ```
