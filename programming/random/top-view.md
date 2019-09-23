@@ -232,6 +232,51 @@ vector<int> Solution::solve(TreeNode* root) {
 }
 ```
 
+### Another One
+```cpp
+vector<int> Solution::solve(TreeNode* root) {
+    vector<int> res;
+    stack<TreeNode*> s;
+    TreeNode * curr = root;
+    while(curr) {
+        s.push(curr);
+        curr = curr->left;
+    }
+    while(!s.empty()) {
+        TreeNode * node = s.top();
+        s.pop();
+        res.push_back(node->val);        
+    }
+    curr = root->right;
+    while(curr) {
+        res.push_back(curr->val);
+        curr = curr->right;
+    }
+    return res;
+}
+```
+### Another One
+```cpp
+void left_view(TreeNode * root, vector<int> &res) {
+    if (!root) return;
+    left_view(root->left, res);
+    res.push_back(root->val);
+}
+
+void right_view(TreeNode * root, vector<int> &res) {
+    if (!root) return;
+    res.push_back(root->val);
+    right_view(root->right, res);
+}
+
+vector<int> Solution::solve(TreeNode* root) {
+    vector<int> res;
+    left_view(root->left, res);
+    res.push_back(root->val);
+    right_view(root->right, res);
+    return res;
+}
+```
 
 ## References
 * https://www.geeksforgeeks.org/print-nodes-top-view-binary-tree/
