@@ -244,7 +244,7 @@ int Solution::solve(vector<vector<int> > &A) {
 from collections import deque
 class Solution:
     def solve(self, A):
-        res,q,n,m = 0,deque(),len(A),len(A[0])
+        res,q,n,m,c,res = 0,deque(),len(A),len(A[0]),0,-1
 
         def neighbours(r, c):
             for nr, nc in ((r-1,c),(r,c-1), (r+1, c), (r, c+1)):
@@ -253,10 +253,9 @@ class Solution:
 
         for i in range(n):
             for j in range(m):
-                if A[i][j]==2:
-                    q.append((i,j))
+                if A[i][j]==2: q.append((i,j))
+                elif A[i][j]==1: c += 1
 
-        res = -1
         while len(q):
             size = len(q)
             for _ in range(size):
@@ -264,14 +263,11 @@ class Solution:
                 for x,y in neighbours(cx, cy):
                     if A[x][y] == 1:
                         A[x][y] = 2
+                        c -= 1
                         q.append((x, y))
             res += 1
 
-        for row in A:
-            if 1 in row:
-                return -1
-
-        return res
+        return res if c==0 else -1
 ```
 
 ## References
