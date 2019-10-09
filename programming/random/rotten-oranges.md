@@ -246,39 +246,32 @@ class Solution:
     def solve(self, A):
         res,q,n,m = 0,deque(),len(A),len(A[0])
 
-        for i in range(n):
-            for j in range(m):
-                if A[i][j]==2:
-                    q.append((i,j))
-
         def neighbours(r, c):
             for nr, nc in ((r-1,c),(r,c-1), (r+1, c), (r, c+1)):
                 if 0 <= nr < n and 0 <= nc < m:
                     yield nr, nc
 
-        minutes = -1
-        sep = (-1,-1)
-        q.append(sep)
+        for i in range(n):
+            for j in range(m):
+                if A[i][j]==2:
+                    q.append((i,j))
+
+        res = -1
         while len(q):
-            while len(q):
-                p = q.popleft()
-                if p is sep:
-                    break
-                cx, cy = p
+            size = len(q)
+            for _ in range(size):
+                cx, cy = q.popleft()
                 for x,y in neighbours(cx, cy):
                     if A[x][y] == 1:
                         A[x][y] = 2
                         q.append((x, y))
-            if len(q):
-                q.append(sep)
-            minutes += 1
+            res += 1
 
         for row in A:
-            for x in row:
-                if x==1:
-                    return -1
+            if 1 in row:
+                return -1
 
-        return minutes
+        return res
 ```
 
 ## References
