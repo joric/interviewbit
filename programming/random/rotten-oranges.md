@@ -244,7 +244,7 @@ int Solution::solve(vector<vector<int> > &A) {
 from collections import deque
 class Solution:
     def solve(self, A):
-        res,q,n,m,c,res = 0,deque(),len(A),len(A[0]),0,-1
+        q,n,m,c,res = deque(),len(A),len(A[0]),0,-1
 
         def neighbours(r, c):
             for nr, nc in ((r-1,c),(r,c-1), (r+1, c), (r, c+1)):
