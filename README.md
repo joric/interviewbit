@@ -30,9 +30,18 @@ For editing Markdown files locally I recommend [Markdown Viewer](https://chrome.
 
 ## Copyrights
 
-This is probably the most complete offline collection up to date (~300 documents).
-
-No web scraping involved, almost everything rewritten and/or solved by my bare hands.
-
 All possible copyrights belong to https://www.interviewbit.com
 
+This is probably the most complete offline collection up to date (~300 documents).
+
+No web scraping involved, everything is rewritten and/or solved by my bare hands.
+
+![](https://i.imgur.com/DSXTZlw.jpg)
+
+(Got to 5th place!)
+
+## References
+
+* https://joric.github.io/interviewbit
+* https://github.com/markedjs/marked
+* https://github.com/PrismLibrary/Prism
