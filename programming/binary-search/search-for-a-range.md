@@ -96,3 +96,15 @@ vector<int> Solution::searchRange(const vector<int> &A, int B) {
     
 }
 ```
+
+## Another solution
+
+```cpp
+vector<int> Solution::searchRange(const vector<int> &A, int B) {
+    auto r = equal_range(A.begin(), A.end(), B);
+    if (r.first!=A.end() && *r.first!=B)
+        return {-1, -1};
+    return { r.first-A.begin(), r.second-A.begin()-1 };
+}
+```
+
