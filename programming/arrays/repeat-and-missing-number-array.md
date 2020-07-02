@@ -57,16 +57,15 @@ vector < int >Solution::repeatedNumber (const vector < int >&A) {
             arr[abs(arr[i]) - 1] = -arr[abs(arr[i]) - 1]; 
         else {
             x = abs(arr[i]);
-            break;
         }
     }
     for (int i = 0; i < arr.size(); i++) { 
         if (arr[i] > 0) {
-            y = arr[i];
+            y = i+1;
             break;
         }
     } 
-    return {x, y}; // does not work for some reason
+    return {x, y};
 }
 ```
 
@@ -137,7 +136,7 @@ In the result xor1, all elements would nullify each other except x and y.
 All the bits that are set in xor1 will be set in either x or y.
 
 So if we take any set bit (We have chosen the rightmost set bit in code)
-of xor1 and make two sets of elements– one set of elements with same
+of xor1 and make two sets of elementsâ€“ one set of elements with same
 bit set and other set with same bit not set.
 
 By doing so, we will get x in one set and y in another set.
