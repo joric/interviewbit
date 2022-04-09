@@ -37,20 +37,22 @@ Can you think of something better?
 
 Try bucketing the array.
 
-## Solution Approach
+## Hint 2
 
 Start tackling this problem by thinking of kinds of numbers that could be members of potential solutions. Think about what range those numbers could have. From this, these are the few scenarios under which a valid triplet could exist.
 
 We have natural boundaries at 0, 1, and 2. So that leads to a few scenarios. Suppose we let A=(0,1] and we let B=(1,2). Then, any number in a potential solution must come from either range A or range B.
 
 That leaves us with four unique combinations:
+
 ```
 1.A, A, A
 2.A, A, B
 3.A, B, B
 4.B, B, B
 ```
-We can quickly deduce that case 3 and case 4 are not possible. The minimum value for range B is a little bit more than 1. If we have two numbers that are a little bit more than 1, then our total sum will be a little bit more than 2. Say the numbers are 0.4, 1.0001 and 1.0001. Here sum is greater than 2. Hence, these cases won't give us the required solution. Thus we can eliminate cases 3,4 and 5 (as they contain at least 2 numbers from range B).
+
+We can quickly deduce that case 3 and case 4 are not possible. The minimum value for range B is a little bit more than 1. If we have two numbers that are a little bit more than 1, then our total sum will be a little bit more than 2. Say the numbers are 0.4, 1.0001 and 1.0001. Here sum is greater than 2. Hence, these cases won’t give us the required solution. Thus we can eliminate cases 3,4 and 5 (as they contain at least 2 numbers from range B).
 
 So then we only have to check cases 1 and 2. Unfortunately, checking these cases is a little difficult. How can we determine if there are three numbers less than or equal to 1 that add up to a value greater than 1 and less than 2?
 
@@ -58,8 +60,10 @@ Maybe we can tighten the restrictions on case 1 to make it easier to solve. What
 
 Now, since we tightened the restriction in case 1, we need another case to cover when values are in the range [2/3,1].
 
-Let us formally define our new ranges. Let A=(0,2/3), B=[2/3,1] and C=(1,2). 
+Let us formally define our new ranges. Let A=(0,2/3), B=[2/3,1] and C=(1,2).
+
 These new ranges leave us with ten unique combinations:
+
 ```
 1.A, A, A
 2.A, A, B
@@ -72,157 +76,258 @@ These new ranges leave us with ten unique combinations:
 9.B, C, C
 10.C, C, C
 ```
+
 Can you now solve the problem??
+
+
+## Solution Approach
+
+Start tackling this problem by thinking of kinds of numbers that could be members of potential solutions. Think about what range those numbers could have. From this, these are the few scenarios under which a valid triplet could exist.
+
+We have natural boundaries at 0, 1, and 2. So that leads to a few scenarios. Suppose we let A=(0,1] and we let B=(1,2). Then, any number in a potential solution must come from either range A or range B.
+
+That leaves us with four unique combinations:
+
+```
+1.A, A, A
+2.A, A, B
+3.A, B, B
+4.B, B, B
+```
+
+We can quickly deduce that case 3 and case 4 are not possible. The minimum value for range B is a little bit more than 1. If we have two numbers that are a little bit more than 1, then our total sum will be a little bit more than 2. Say the numbers are 0.4, 1.0001 and 1.0001. Here sum is greater than 2. Hence, these cases won’t give us the required solution. Thus we can eliminate cases 3,4 and 5 (as they contain at least 2 numbers from range B).
+
+So then we only have to check cases 1 and 2. Unfortunately, checking these cases is a little difficult. How can we determine if there are three numbers less than or equal to 1 that add up to a value greater than 1 and less than 2?
+
+Maybe we can tighten the restrictions on case 1 to make it easier to solve. What if we knew that every number in range A was less than 2/3? Then we could just select the three highest values in A. If those three numbers exist and add up to a value in the range (1,2), then case 1 is fulfilled. Example- Let highest numbers in A be 0.333,0.55,0.44. These three numbers lies in the required range(1,2) and hence would give us the solution.
+
+Now, since we tightened the restriction in case 1, we need another case to cover when values are in the range [2/3,1].
+
+Let us formally define our new ranges. Let A=(0,2/3), B=[2/3,1] and C=(1,2).
+These new ranges leave us with ten unique combinations:
+
+```
+1.A, A, A
+2.A, A, B
+3.A, A, C
+4.A, B, B
+5.A, B, C
+6.A, C, C
+7.B, B, B
+8.B, B, C
+9.B, C, C
+10.C, C, C
+```
+
+We can quickly deduce that cases 6, 7, 8, 9, and 10 are not possible (the total sum will always be greater than 2).
+
+That leaves us with cases 1, 2, 3, 4, and 5.
+
+We can check case 1 by looking at the three largest values in A. Say we have these highest values as : 0.500,0.6666,0.65777. This lies between 1 and 2. We only have to worry about underflow in this case, meaning the sum of highest values in this range may not be greater than 1. But we are sure that this will be less than 2. So we only have to check for the condition whether these are greater than 1 or not.
+
+Now, what about case 2? Under case 2, we have two numbers in range A and one number in range B. We have to worry about underflow and overflow. To avoid underflow, let’s suppose that we select the two largest values in A. Let’s call the sum of those numbers s. The range of s will be (0,4/3). So we just need to determine if there is a value in B that is greater than 1−s and less than 2−s. Simple enough.
+
+Under case 3, we have two numbers in range A and one number in range C. We just have to worry about overflow ( because to the presence of an integer from range C, we are sure that their sum will be greater than 1). To avoid overflow, let’s suppose that we select the two smallest values in A and the smallest value in C. If the sum of those numbers is in the range ((1,2), then this case has occurred.
+
+Case 4 will be similar to case 2. Under case 4, we have one number in range A and two numbers in range B. We have to worry about overflow. To avoid overflow, let’s suppose that we select the two smallest values in BB. Let’s call the sum of those numbers s. The range of ss will be [4/3,2]. So we just need to determine if there is a value in A that is less than 2−s. Not bad.
+
+Case 5 is pretty easy as well. We have to worry about overflow. To avoid overflow, let’s suppose that we select the smallest value in A, the smallest value in B, and the smallest value in C. If the sum of those numbers is in the range (1,2), then this case has occurred.
+
+So, to solve the problem, we just check to see if case 1, 2, 3, 4, or 5 is satisfied. Each case can be checked in O(n) time.
+
+We can conclude that for all the 5 possible cases, we just need 3 largest values in range A, 2 smallest in range B, 2 smallest in range A and the smallest in range C. There are a lot of methods, choose anyone to find them.
 
 ## Solution
 
 ### Editorial
-```cpp
-int Solution::solve(vector<string> &arr) {
-    int n = arr.size(), i;
-    vector<float> v;
-    for (i = 0; i < n; i++) {
-        v.push_back(stof(arr[i]));
-    }
-    float a = v[0], b = v[1], c = v[2];
 
-    float mx = 0;
-    for (i = 3; i < n; i++) {
-        if (a + b + c < 2 && a + b + c > 1)
-            return 1;
-        else if (a + b + c > 2) {
-            if (a > b && a > c)
-                a = v[i];
-            else if (b > a && b > c)
-                b = v[i];
-            else
-                c = v[i];
-        } else {
-            if (a < b && a < c)
-                a = v[i];
-            else if (b < a && b < c)
-                b = v[i];
-            else
-                c = v[i];
+```cpp
+double min_element(vector<double> A) { // return minimum element
+    double min = A[0];
+    for (int i = 0; i < A.size(); i++) {
+        if (A[i] < min) {
+            min = A[i];
         }
     }
-    if (a + b + c > 1 && a + b + c < 2)
-        return 1;
-    else
-        return 0;
+    return min;
 }
+int Solution::solve(vector<string> &a) {
+    vector<double> A, B, C;
 
-```
+    for (int i = 0; i < a.size(); i++) {
+        char b[20];
+        for (int j = 0; j < a[i].length(); j++) {
+            b[j] = a[i][j];
+        }
+        if (0.0 < atof(b) &&
+            atof(b) < ((double)2.0 / (double)3.0)) // atof converts string to double
+        {
+            A.push_back(atof(b));
 
-### Another Solution
+        } else if ((double)2.0 / (double)3.0 <= atof(b) && atof(b) <= 1.0) {
+            B.push_back(atof(b));
 
-```cpp
-int Solution::solve (vector < string > &A) {
-    vector < double > arr;
-    
-    for (auto s:A)
-        arr.push_back (stod (s));
-
-    double a = arr[0], b = arr[1], c = arr[2];
-    
-    for (int i = 3; i < A.size ()+1; i++) {
-        double sum = a+b+c;
-        
-        if (sum>1 && sum<2)
-            return 1;
-        
-        if (i>=A.size())
-            break;
-        
-        double x = arr[i];
-        double m = sum>2 ? max(a, max(b,c)): sum<=1 ? min(a, min(b,c)): -1;
-        
-        if (m==a) a=x;
-        else if (m==b) b=x;
-        else if (m==c) c=x;
-    }
-    return 0;
-}
-```
-### Another Solution
-```cpp
-int Solution::solve (vector < string > &A) {
-    vector < double > arr;
-    
-    for (auto s:A)
-        arr.push_back (stod (s));
-
-    double a = arr[0], b = arr[1], c = arr[2];
-    
-    for (int i = 3; i < A.size ()+1; i++) {
-        double sum = a+b+c;
-        
-        if (sum>1 && sum<2)
-            return 1;
-        
-        if (i>=A.size())
-            break;
-        
-        double x = arr[i];
-        
-        if (sum>2) {
-            double m = max(a, max(b,c));
-            if (m==a) a=x; else if (m==b) b=x; else if (m==c) c=x;
-        } else if (sum<=1) {
-            double m = min(a, min(b,c));
-            if (m==a) a=x; else if (m==b) b=x; else if (m==c) c=x;
+        } else if (1.0 < atof(b) && atof(b) < 2.0) {
+            C.push_back(atof(b));
         }
     }
-    return 0;
+
+    // 1
+    int res = 0;
+
+    if (A.size() >= 3) {
+        priority_queue<double> q(
+            A.begin(),
+            A.end()); // priority queue used to get max 3 elements in O(logn) time
+        double m = 0;
+        for (int i = 0; i <= 2; i++) {
+            m += q.top();
+            q.pop();
+        }
+
+        if (m > 1.0) {
+            res = 1;
+            return res;
+        }
+    }
+    // 2
+    if (A.size() >= 2 && B.size() >= 1) {
+        priority_queue<double> q1(
+            A.begin(),
+            A.end()); // priority queue used to get max 2 elements in O(logn) time
+
+        double m1 = 0;
+        for (int i = 0; i <= 1; i++) {
+            m1 += q1.top();
+            q1.pop();
+        }
+
+        for (int i = 0; i < B.size(); i++) {
+            if (1 - m1 < B[i] && B[i] < 2 - m1) {
+                res = 1;
+                return res;
+            }
+        }
+    }
+
+    // 3
+    if (A.size() >= 2 && C.size() >= 1) {
+        priority_queue<double, std::vector<double>, std::greater<double>> q2(
+            A.begin(),
+            A.end()); // priority queue used to get min 2 elements in O(logn) time
+        double m2 = 0;
+        for (int i = 0; i <= 1; i++) {
+            m2 += q2.top();
+            q2.pop();
+        }
+
+        double min = min_element(C);
+
+        if (m2 + min < 2.0) {
+            res = 1;
+            return res;
+        }
+    }
+
+    // 4
+    if (B.size() >= 2 && A.size() >= 1) {
+        priority_queue<double, std::vector<double>, std::greater<double>> q3(
+            B.begin(),
+            B.end()); // priority queue used to get min 2 elements in O(logn) time
+
+        double m3 = 0;
+        for (int i = 0; i <= 1; i++) {
+            m3 += q3.top();
+            q3.pop();
+        }
+
+        for (int i = 0; i < A.size(); i++) {
+            if (A[i] < 2 - m3) {
+                res = 1;
+                return res;
+            }
+        }
+    }
+
+    // 5
+    if (A.size() >= 1 && B.size() >= 1 && C.size() >= 1) {
+        int res3 = 0;
+        double min1 = min_element(A);
+        double min2 = min_element(B);
+        double min3 = min_element(C);
+        if (min1 + min2 + min3 < 2 && min1 + min2 + min3 > 1) {
+            res = 1;
+            return res;
+        }
+    }
+
+    return res;
+    // Time complexity =O(logn)+O(n)
+    // hence,Time complexity=O(n)
 }
 ```
-### Another Solution
-```cpp
-int Solution::solve (vector < string > &A) {
-	vector < double >arr;
-for (auto s:A)
-		arr.push_back (stod (s));
 
-	double a = arr[0], b = arr[1], c = arr[2];
-	for (int i = 3; i < A.size (); i++) {
-		// check if sum fall in (1, 2)
-		if (a + b + c > 1 && a + b + c < 2) {
-			return 1;
-		}
-		// if not, then check is sum greater than 2
-		// if so, then replece MAX(a,b,c) to new number
-		else if (a + b + c > 2) {
-			if (a > b && a > c) {
-				a = arr[i];
-			}
-			else if (b > a && b > c) {
-				b = arr[i];
-			}
-			else if (c > a && c > b) {
-				c = arr[i];
-			}
-		}
-		// else then sum must be less than 1
-		// then replace MIN(a,b,c) to new number
-		else {
-			if (a < b && a < c) {
-				a = arr[i];
-			}
-			else if (b < a && b < c) {
-				b = arr[i];
-			}
-			else if (c < a && c < b) {
-				c = arr[i];
-			}
-		}
-	}
-	// check for last a, b, c  triplet
-	if (a + b + c > 1 && a + b + c < 2) {
-		return 1;
-	}
-	else {
-		return 0;
-	}
+### Python 3
 
-}
+```python
+class Solution:
+    # @param A : list of strings
+    # @return an integer
+    def solve(self, A):
+        n = len(A)
+        B = [float(i) for i in A]
+        buckets = [[], [], []]
+        for i in B:
+            if i < 2.0/3:
+                buckets[0].append(i)
+            elif i < 1:
+                buckets[1].append(i)
+            else:
+                buckets[2].append(i)
+        
+        def get(index):
+            amx1, amx2, amx3 = -10, -10, -10
+            ami1, ami2, ami3 = 3, 3, 3
+            for i in buckets[index]:
+                if i > amx1:
+                    amx1, amx2, amx3 = i, amx1, amx2
+                elif i > amx2:
+                    amx2, amx3 = i, amx2
+                elif i > amx3:
+                    amx3 = i
+            
+                if i < ami1:
+                    ami1, ami2, ami3 = i, ami1, ami2
+                elif i < ami2:
+                    ami2, ami3 = i, ami2
+                elif i < ami3:
+                    ami3 = i
+            return [amx1, amx2, amx3, ami1, ami2, ami3]
+        
+        
+        a = get(0)
+        b = get(1)
+        c = get(2)
+        ls = []
+        fc = a[0] + a[1] + a[2]
+        ls.append(fc)
+        fc = a[3] + a[4] + c[3]
+        ls.append(fc)
+        fc = a[3] + b[3] + b[4]
+        ls.append(fc)
+        fc = a[3] + b[3] + c[3]
+        ls.append(fc)
+        fc = b[0] + a[3] + a[4]
+        ls.append(fc)
+        if a[0] != a[3]:
+            fc = b[0] + a[0] + a[3]
+            ls.append(fc)
+            fc = b[3] + a[0] + a[3]
+            ls.append(fc)
+        fc = b[3] + a[0] + a[1]
+        ls.append(fc)
+        for fc in ls:
+            if fc > 1 and fc < 2:
+                return 1
+        return 0
 ```
