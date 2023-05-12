@@ -2,7 +2,8 @@
 
 https://www.interviewbit.com/problems/count-element-occurence
 
- easy std solutions */
+```cpp
+/* easy std solutions */
 int Solution::findCount(const vector<int> &A, int B) {
     auto lower = lower_bound(A.begin(), A.end(), B);
     auto upper = upper_bound(A.begin(), A.end(), B);
